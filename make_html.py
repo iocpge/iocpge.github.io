@@ -25,7 +25,7 @@ with doc.head:
 with doc:
     with div(id="Author"):
         attr(cls="author")
-        p("Olivier Reynet")
+        p("Mr IOcpge")
     with div(id="abstract"):
         attr(cls="abstract")
         h2("Résumé")     
@@ -43,7 +43,7 @@ with doc:
 import math
 s = math.sqrt(3)
 print(3)"""
-            , cls="python")
+            , cls="language-python")
 
     with div(id = "eqex"):
         p("in line equation \(X^3 = X^2 +1\)")
