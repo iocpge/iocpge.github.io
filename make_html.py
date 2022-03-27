@@ -15,8 +15,8 @@ with doc.head:
     link(rel="stylesheet", href="https://latex.now.sh/lang/fr.css")
 
     script(type='text/javascript', src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js")
-    script(type='text/javascript', id = "Config MathJax", src="MathJax = {tex: { tags: 'ams'}};")
-    script(type='text/javascript', id="MathJax-script", _async=True, src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js")
+    script("MathJax = {tex: { tags: 'ams'}};")
+    script(id="MathJax-script", _async=True, src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js")
     script(type='text/javascript', id="Local scripts",  src='script.js')
     link(rel="icon",href="/favicon.ico")
     link(rel="icon",href="/favicon.svg",type="image/svg+xml")
@@ -25,7 +25,8 @@ with doc.head:
 with doc:
     with div(id="Author"):
         attr(cls="author")
-        p("Mr IOcpge")
+        p("Io Cpge")
+        
     with div(id="abstract"):
         attr(cls="abstract")
         h2("Résumé")     
@@ -42,6 +43,8 @@ with doc:
         code( """
 import math
 s = math.sqrt(3)
+for i in range(5):
+    print(s)
 print(3)"""
             , cls="language-python")
 
@@ -52,6 +55,7 @@ print(3)"""
               \int_0^\infty \\frac{x^3}{e^x-1}\,dx = \\frac{\pi^4}{15}
               \label{eq:sample}
            \\end{equation} """)
+        p("Cette équation est référencée \eqref{eq:sample}")
 
 print(doc)
 
