@@ -1,12 +1,12 @@
 <svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="16" cy="16" r="16" fill="#F2AC48" />
-  <circle cx="48" cy="16" r="16" fill="#F2AC48" />
-  <circle cx="80" cy="16" r="16" fill="#F2AC48" />
-  <circle cx="112" cy="16" r="16" fill="#F2AC48" />
-  <circle cx="32" cy="48" r="16" fill="#73F3F1" />
-  <circle cx="64" cy="48" r="16" fill="#73F3F1" />
-  <circle cx="96" cy="48" r="16" fill="#73F3F1" />
-  <circle cx="48" cy="80" r="16" fill="red" />
-  <circle cx="80" cy="80" r="16" fill="red" />
-  <circle cx="64" cy="112" r="16" fill="black" />
+  <circle cx="16" cy="16" r="16" fill="#ff5050" stroke="black" />
+  <circle cx="48" cy="16" r="16" fill="#ff5050" stroke="black"/>
+  <circle cx="80" cy="16" r="16" fill="#ff5050" stroke="black"/>
+  <circle cx="112" cy="16" r="16" fill="#ff5050" stroke="black"/>
+  <circle cx="32" cy="48" r="16" fill="#00ffcc" stroke="black"/>
+  <circle cx="64" cy="48" r="16" fill="#00ffcc" stroke="black"/>
+  <circle cx="96" cy="48" r="16" fill="#00ffcc" stroke="black"/>
+  <circle cx="48" cy="80" r="16" fill="#ff5050" stroke="black"/>
+  <circle cx="80" cy="80" r="16" fill="#ff5050" stroke="black"/>
+  <circle cx="64" cy="112" r="16" fill="#00ffcc" stroke="black"/>
 </svg>
