@@ -13,7 +13,6 @@ with doc.head:
     link(rel="apple-touch-icon",href="/apple-touch-icon.png")
 
 with doc:
-    script(src="js/scripts.js")
     h1("Hello !")
     with div(id='header').add(ol()):
         for i in ['home', 'about', 'contact']:
