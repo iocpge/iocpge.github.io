@@ -14,19 +14,19 @@
 
 ## Une autre section
 
-Un paragraphe *interminable* avec une équation mathématique en ligne  $$\(X^3 = X^2 +1\)$$ et une autre en exergue et référencée \eqref{eq:sample} :  
+Un paragraphe *interminable* avec une équation mathématique en ligne  $$X^3 = X^2 +1$$ et une autre en exergue et référencée \eqref{eq:sample} :  
 $$
-\\begin{equation}
+\begin{equation}
     \int_0^\infty \\frac{x^3}{e^x-1}\,dx = \\frac{\pi^4}{15}
      \label{eq:sample}
-\\end{equation}
+\end{equation}
 $$
 
 # Puis un autre sujet
 
 Avec du code :
 
-~~~ language-python
+~~~python
 import math
 
 def func(a):
