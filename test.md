@@ -26,7 +26,7 @@ $$
 
 Avec du code :
 
-~~~ python
+~~~ language-python
 import math
 
 def func(a):
