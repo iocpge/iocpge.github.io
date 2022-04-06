@@ -13,7 +13,8 @@ with doc.head:
     link(rel='stylesheet', href="https://latex.now.sh/style.css")
     link(rel="stylesheet", href="https://latex.now.sh/prism/prism.css")
     link(rel="stylesheet", href="https://latex.now.sh/lang/fr.css")
-
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.css")
+    script(type='text/javascript', src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js")
     script(type='text/javascript', src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js")
     script("MathJax = {tex: { tags: 'ams'}};")
     script(id="MathJax-script", _async=True, src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js")
@@ -21,6 +22,7 @@ with doc.head:
     link(rel="icon",href="/favicon.ico")
     link(rel="icon",href="/favicon.svg",type="image/svg+xml")
     link(rel="apple-touch-icon",href="/apple-touch-icon.png")
+    script(type='text/javascript', src='pseudocode.renderElement(document.getElementById("algorithm"));')
 
 with doc:
     with div(id="Author"):
@@ -56,6 +58,15 @@ print(3)"""
               \label{eq:sample}
            \\end{equation} """)
         p("Cette équation est référencée \eqref{eq:sample}")
+
+    with div(id='algorithm'):
+        attr(style="display:hidden;")
+        pre( """
+        \\begin{algorithmic}
+        \PRINT \\texttt{'hello world'}
+        \end{algorithmic}
+        """)
+
 
 print(doc)
 
