@@ -36,3 +36,8 @@ for i in range (1, 10):
     print(func(a))
 ~~~
 
+# Test hide and show
+
+```{toggle}
+Some hidden toggle content!
+```
