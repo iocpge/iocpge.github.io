@@ -39,7 +39,7 @@ for item in os.listdir("ipt/"):
         for file in os.listdir(current_dir):
             #print("File --> ",file)
             if os.path.isfile(current_dir+str(file)):
-                files_and_links.append([file, current_dir+str(file)])
+                files_and_links.append([file.replace("_"," "), current_dir+str(file)])
         with doc:
             with div(id=current_dir):
                 h3(item)
