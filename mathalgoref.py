@@ -32,10 +32,10 @@ with doc:
     with div(id="Author"):
         attr(cls="author")
         p("Io Cpge")
-        
+
     with div(id="abstract"):
         attr(cls="abstract")
-        h2("Résumé")     
+        h2("Résumé")
         p("Tout ce qu'il faut savoir et savoir faire pour réussir les épreuves d'informatique sereinement.")
     with div(id='header').add(ol()):
         for i in [['Informatique pour tous (IPT)', 'ipt'], ['Option informatique (MPSI/MP/MP*)', 'Optinfo']]:
@@ -44,6 +44,33 @@ with doc:
     with div():
         attr(cls='body')
         p("Let's start !")
- 
+
+    with div(id = "codex").add(pre()):
+        code( """
+import math
+s = math.sqrt(3)
+for i in range(5):
+    print(s)
+print(3)"""
+            , cls="language-python")
+
+    with div(id = "eqex"):
+        p("in line equation \(X^3 = X^2 +1\)")
+        p('\[ e^{i \pi} + 1 = 0 \]')
+        p("""\\begin{equation}
+              \int_0^\infty \\frac{x^3}{e^x-1}\,dx = \\frac{\pi^4}{15}
+              \label{eq:sample}
+           \\end{equation} """)
+        p("Cette équation est référencée \eqref{eq:sample}")
+
+    with div(id='algorithm'):
+        attr(style="display:hidden;")
+        pre( """
+        \\begin{algorithmic}
+        \PRINT \\texttt{'hello world'}
+        \end{algorithmic}
+        """)
+
+
 print(doc)
 
