@@ -35,12 +35,14 @@ with doc:
 #TODO Balayer les répertoires et sous répertoires et créer les ressources associées
 
 
-for semester in os.listdir("ic/"):
+semesters = sorted(os.listdir("ic/"))
+for semester in semesters:
     if os.path.isdir("ic/"+str(semester)):
         current_sem = "ic/"+str(semester)+"/"
         #print("Current semester --> ",current_sem)
         tps = {}
-        for tpdir in os.listdir(current_sem):
+        tpdirs = sorted(os.listdir(current_sem))
+        for tpdir in tpdirs:
             #print("TP Directory  --> ",tpdir)
             current_tp =  str(current_sem)+str(tpdir)+"/"
             if os.path.isdir(current_tp):
