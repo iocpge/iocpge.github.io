@@ -35,7 +35,7 @@ with doc:
         """)
 
     with div(id='topages').add(ol()):
-        for i in [['Informatique pour tous (IPT)', 'ipt'], ['Option informatique (MPSI/MP/MP*)', 'optinfo']]:
+        for i in [['Informatique commune', 'ic'], ['Option informatique (MPSI/MP/MP*)', 'optinfo']]:
             li(a(i[0], href='/%s.html' % i[1]))
 
 

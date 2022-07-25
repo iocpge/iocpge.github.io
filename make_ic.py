@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+import dominate
+from dominate.tags import *
+import os
+
+
+doc = dominate.document(title='IC')
+
+with doc.head:
+    meta(name="title", content="Informatique commune")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    # link(rel='stylesheet', href='style.css')
+    link(rel='stylesheet', href="https://latex.now.sh/style.css")
+    link(rel="stylesheet", href="https://latex.now.sh/prism/prism.css")
+    link(rel="stylesheet", href="https://latex.now.sh/lang/fr.css")
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.css")
+    script(type='text/javascript', src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js")
+    script(type='text/javascript', src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js")
+    script("MathJax = {tex: { tags: 'ams'}};")
+    script(id="MathJax-script", _async=True, src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js")
+    script(type='text/javascript', id="Local scripts", src='script.js')
+    link(rel="icon", href="/favicon.ico")
+    link(rel="icon", href="/favicon.svg", type="image/svg+xml")
+    link(rel="apple-touch-icon", href="/apple-touch-icon.png")
+    script(type='text/javascript', src='pseudocode.renderElement(document.getElementById("algorithm"));')
+
+with doc:
+    with div(id="header"):
+        h1("Informatique commune")
+
+#TODO Balayer les répertoires et sous répertoires et créer les ressources associées
+
+
+for semester in os.listdir("ic/"):
+    if os.path.isdir("ic/"+str(semester)):
+        current_sem = "ic/"+str(semester)+"/"
+        #print("Current semester --> ",current_sem)
+        tps = {}
+        for tpdir in os.listdir(current_sem):
+            #print("TP Directory  --> ",tpdir)
+            current_tp =  str(current_sem)+str(tpdir)+"/"
+            if os.path.isdir(current_tp):
+                files_and_links =[]
+                for file in os.listdir(current_tp):
+                    if os.path.isfile(current_tp+str(file)) and file.endswith('.pdf'):
+                        if "corrections" in file:
+                            file_name = "sujet et corrections"
+                        elif "sujet" in file:
+                            file_name = "sujet"
+                        elif "cours" in file:
+                            file_name = cours
+                        else:
+                            pass
+                        files_and_links.append([file_name, current_tp+str(file)])
+                tp_name=str(tpdir).replace("_"," ") 
+                tps[tp_name]=files_and_links
+        with doc:
+            with div(id=current_sem):
+                sem = str(semester).replace("_", " ")
+                #print(sem)
+                h2(sem)
+                with div(id=current_sem):
+                        for tp,files_and_links in tps.items():
+                            with div(id=current_tp):
+                                h3(tp)
+                                ul(li(a(file_name, href=link), __pretty=False) for file_name, link in files_and_links)
+
+
+print(doc)
