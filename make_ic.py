@@ -28,6 +28,10 @@ with doc:
     with div(id="header"):
         h1("Informatique commune")
 
+    with div(id='toc').add(ol()):
+        for i in [['Semestre 1', 's1'], ['Semestre 2', 's2'], ['Semestre 3', 's3']]:
+            li(a(i[0], href='#%s' % i[0]))
+
 #TODO Balayer les répertoires et sous répertoires et créer les ressources associées
 
 
@@ -55,15 +59,14 @@ for semester in os.listdir("ic/"):
                 tp_name=str(tpdir).replace("_"," ") 
                 tps[tp_name]=files_and_links
         with doc:
-            with div(id=current_sem):
-                sem = str(semester).replace("_", " ")
+            sem = str(semester).replace("_", " ")
+            with div(id=sem):
                 #print(sem)
                 h2(sem)
-                with div(id=current_sem):
-                        for tp,files_and_links in tps.items():
-                            with div(id=current_tp):
-                                h3(tp)
-                                ul(li(a(file_name, href=link), __pretty=False) for file_name, link in files_and_links)
+                for tp,files_and_links in tps.items():
+                    with div(id=tp):
+                        h3(tp)
+                        ul(li(a(file_name, href=link), __pretty=False) for file_name, link in files_and_links)
 
 
 print(doc)
