@@ -24,17 +24,32 @@ with doc.head:
     link(rel="apple-touch-icon", href="/apple-touch-icon.png")
     script(type='text/javascript', src='pseudocode.renderElement(document.getElementById("algorithm"));')
 
+
+# HEADERS and TOC
 with doc:
     with div(id="header"):
-        h1("Informatique commune")
+        h1("Informatique commune - Cours et TP")
 
     with div(id='toc').add(ol()):
         for i in [['Semestre 1', 's1'], ['Semestre 2', 's2'], ['Semestre 3', 's3']]:
             li(a(i[0], href='#%s' % i[0]))
 
-#TODO Balayer les répertoires et sous répertoires et créer les ressources associées
 
+# INTRODUCTION
+files_and_links =[]
+current_files = sorted(os.listdir("ic/"))
+for file in current_files:
+   if os.path.isfile("ic/"+str(file)) and file.endswith('.pdf'):
+       file_name = str(file).replace("_"," ").replace(".pdf", "")
+       files_and_links.append([file_name, "ic/"+str(file)])
 
+with doc:
+    with div(id="Cours d'introdution"):
+        h2("Introduction")
+        ul(li(a(file_name, href=link), __pretty=False) for file_name, link in files_and_links)
+        
+        
+# SEMESTERS
 semesters = sorted(os.listdir("ic/"))
 for semester in semesters:
     if os.path.isdir("ic/"+str(semester)):
@@ -47,14 +62,15 @@ for semester in semesters:
             current_tp =  str(current_sem)+str(tpdir)+"/"
             if os.path.isdir(current_tp):
                 files_and_links =[]
-                for file in os.listdir(current_tp):
+                current_files = sorted(os.listdir(current_tp))
+                for file in current_files:
                     if os.path.isfile(current_tp+str(file)) and file.endswith('.pdf'):
-                        if "corrections" in file:
-                            file_name = "sujet et corrections"
+                        if "solutions" in file:
+                            file_name = "sujet et solutions"
                         elif "sujet" in file:
                             file_name = "sujet"
-                        elif "cours" in file:
-                            file_name = cours
+                        elif "Cours" in file:
+                            file_name = "cours"
                         else:
                             pass
                         files_and_links.append([file_name, current_tp+str(file)])
