@@ -28,10 +28,11 @@ with doc.head:
 # HEADERS and TOC
 with doc:
     with div(id="header"):
-        h1("Informatique commune - Cours et TP")
+        h1("Informatique commune")
+        h2("Cours et TP / MPSI, PCSI, MP, PC")
 
     with div(id='toc').add(ol()):
-        for i in [['Semestre 1', 's1'], ['Semestre 2', 's2'], ['Semestre 3', 's3']]:
+        for i in [['Introduction', 'intro'],['Semestre 1', 's1'], ['Semestre 2', 's2'], ['Semestre 3', 's3']]:
             li(a(i[0], href='#%s' % i[0]))
 
 
@@ -44,7 +45,7 @@ for file in current_files:
        files_and_links.append([file_name, "ic/"+str(file)])
 
 with doc:
-    with div(id="Cours d'introdution"):
+    with div(id="Introduction"):
         h2("Introduction")
         ul(li(a(file_name, href=link), __pretty=False) for file_name, link in files_and_links)
         
