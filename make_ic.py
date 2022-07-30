@@ -38,7 +38,7 @@ with doc:
 
 # INTRODUCTION
 files_and_links =[]
-current_files = sorted(os.listdir("ic/Introduction"))
+current_files = sorted(os.listdir("ic/Introduction/"))
 for file in current_files:
    if os.path.isfile("ic/Introduction/"+str(file)) and file.endswith('.pdf'):
        file_name = str(file).replace("_"," ").replace(".pdf", "")
