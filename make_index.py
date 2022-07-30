@@ -30,13 +30,12 @@ with doc:
     with div(id="abstract"):
         attr(cls="abstract")
         h2("Résumé")
-        p("""Tout ce qu'il faut savoir et savoir faire pour réussir les épreuves d'informatique sereinement: 
-        cours, travaux pratiques sur machine, quizz, devoirs et corrigés. 
+        p("""Tout ce qu'il faut savoir et savoir faire pour réussir les épreuves d'informatique en CPGE PC et MP. 
         """)
 
     with div(id='topages').add(ol()):
         for i in [['Informatique commune', 'ic'], ['Option informatique (MPSI/MP/MP*)', 'optinfo']]:
-            li(a(i[0], href='/%s.html' % i[1]))
+            li(a(i[0], href='%s.html' % i[1]))
 
 
 print(doc)
