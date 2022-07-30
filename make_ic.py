@@ -40,7 +40,7 @@ with doc:
 files_and_links =[]
 current_files = sorted(os.listdir("ic/Introduction"))
 for file in current_files:
-   if os.path.isfile("ic/Inroduction/"+str(file)) and file.endswith('.pdf'):
+   if os.path.isfile("ic/Introduction/"+str(file)) and file.endswith('.pdf'):
        file_name = str(file).replace("_"," ").replace(".pdf", "")
        files_and_links.append([file_name, "ic/Introduction"+str(file)])
 
