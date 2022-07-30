@@ -42,7 +42,7 @@ current_files = sorted(os.listdir("ic/Introduction"))
 for file in current_files:
    if os.path.isfile("ic/Introduction/"+str(file)) and file.endswith('.pdf'):
        file_name = str(file).replace("_"," ").replace(".pdf", "")
-       files_and_links.append([file_name, "ic/Introduction"+str(file)])
+       files_and_links.append([file_name, "ic/Introduction/"+str(file)])
 
 with doc:
     with div(id="Introduction"):
@@ -51,7 +51,8 @@ with doc:
         
         
 # SEMESTERS
-semesters = sorted(os.listdir("ic/"))
+
+semesters = sorted([filename for filename in os.listdir("ic/") if filename.startswith("Semestre")])
 for semester in semesters:
     if os.path.isdir("ic/"+str(semester)):
         current_sem = "ic/"+str(semester)+"/"
@@ -73,7 +74,7 @@ for semester in semesters:
                         elif "Cours" in file:
                             file_name = "cours"
                         else:
-                            pass
+                            file_name = file.replace("_"," ")
                         files_and_links.append([file_name, current_tp+str(file)])
                 tp_name=str(tpdir).replace("_"," ") 
                 tps[tp_name]=files_and_links
