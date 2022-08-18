@@ -32,7 +32,7 @@ with doc:
         h2("")
 
     with div(id='toc').add(ol()):
-        for i in [['Podcasts', 'Podcasts'], ['Vidéos', 'videos']]:
+        for i in [['Podcasts', 'Podcasts'], ['Vidéos', 'videos'], ['Sujets et rapports des concours','concours']]:
             li(a(i[0], href='#%s' % i[0]))
 
 
@@ -57,5 +57,19 @@ with doc:
     with div(id="videos"):
         h3("Vidéos")
         ul(li(a(title, href=link), __pretty=False) for title, link in titles_and_links)
+
+# Concours
+
+titles_and_links =  []
+titles_and_links.append(("Sujets et rapports du concours Centrale Supélec","https://www.concours-centrale-supelec.fr/CentraleSupelec"))
+titles_and_links.append(("Sujets et rapports du concours CCINP","https://www.concours-commun-inp.fr/fr/epreuves/annales.html"))
+titles_and_links.append(("Sujets et rapports du concours Commun Mines Ponts","https://www.concoursminesponts.fr/page8/page8.html"))
+titles_and_links.append(("Sujets et rapports du concours Polytechnique","https://www.polytechnique.edu/admission-cycle-ingenieur/documentation/sujets-rapports-statistiques"))
+titles_and_links.append(("Sujets et rapports du concours ENS Sciences","https://www.ens.psl.eu/une-formation-d-exception/admission-concours/concours-voie-cpge/concours-voie-cpge-sciences-0"))
+with doc:
+    with div(id="concours"):
+        h3("Concours (annales)")
+        ul(li(a(title, href=link), __pretty=False) for title, link in titles_and_links)
+
 
 print(doc)
