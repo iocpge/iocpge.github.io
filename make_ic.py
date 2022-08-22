@@ -76,6 +76,9 @@ for semester in semesters:
                         else:
                             file_name = file.replace("_"," ")
                         files_and_links.append([file_name, current_tp+str(file)])
+                    elif os.path.isfile(current_tp+str(file)):
+                        file_name = file.replace("_"," ")
+                        files_and_links.append([file_name, current_tp+str(file)])
                 tp_name=str(tpdir).replace("_"," ") 
                 tps[tp_name]=files_and_links
         with doc:
