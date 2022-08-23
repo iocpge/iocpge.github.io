@@ -2,15 +2,15 @@
 import dominate
 from dominate.tags import *
 import os
-
+import re
 
 doc = dominate.document(title='IC')
 
 with doc.head:
     meta(name="title", content="Informatique commune")
     meta(name="viewport", content="width=device-width, initial-scale=1")
-    # link(rel='stylesheet', href='style.css')
-    link(rel='stylesheet', href="https://latex.now.sh/style.css")
+    link(rel='stylesheet', href='style.css')
+    #link(rel='stylesheet', href="https://latex.now.sh/style.css")
     link(rel="stylesheet", href="https://latex.now.sh/prism/prism.css")
     link(rel="stylesheet", href="https://latex.now.sh/lang/fr.css")
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.css")
@@ -32,21 +32,25 @@ with doc:
         h2("Cours et TP / MPSI, PCSI, MP, PC")
 
     with div(id='toc').add(ol()):
-        for i in [['Introduction', 'intro'],['Semestre 1', 's1'], ['Semestre 2', 's2'], ['Semestre 3', 's3']]:
+        for i in [['Divers', 'Divers'],['Semestre 1', 's1'], ['Semestre 2', 's2'], ['Semestre 3', 's3']]:
             li(a(i[0], href='#%s' % i[0]))
 
 
+
+nre = re.compile(r"""(_\d+_)""")
+
 # INTRODUCTION
 files_and_links =[]
-current_files = sorted(os.listdir("ic/Introduction/"))
+current_files = sorted(os.listdir("ic/Divers/"))
 for file in current_files:
-   if os.path.isfile("ic/Introduction/"+str(file)) and file.endswith('.pdf'):
-       file_name = str(file).replace("_"," ").replace(".pdf", "")
-       files_and_links.append([file_name, "ic/Introduction/"+str(file)])
+   if os.path.isfile("ic/Divers/"+str(file)) and file.endswith('.pdf'):
+       file_name = nre.sub(" - ", file)
+       file_name = file_name.replace("_"," ").replace(".pdf", "")
+       files_and_links.append([file_name, "ic/Divers/"+str(file)])
 
 with doc:
-    with div(id="Introduction"):
-        h2("Introduction")
+    with div(id="Divers"):
+        h2("Divers")
         ul(li(a(file_name, href=link), __pretty=False) for file_name, link in files_and_links)
         
         
@@ -67,14 +71,16 @@ for semester in semesters:
                 current_files = sorted(os.listdir(current_tp))
                 for file in current_files:
                     if os.path.isfile(current_tp+str(file)) and file.endswith('.pdf'):
-                        if "solutions" in file:
-                            file_name = "sujet et solutions"
-                        elif "sujet" in file:
-                            file_name = "sujet"
-                        elif "Cours" in file:
-                            file_name = "cours"
-                        else:
-                            file_name = file.replace("_"," ")
+                        #if "solutions" in file:
+                        #    file_name = "sujet et solutions"
+                        #elif "sujet" in file:
+                        #    file_name = "sujet"
+                        #elif "Cours" in file:
+                        #    file_name = "cours"
+                        #else:
+                        #    file_name = file.replace("_"," ")
+                        file_name = nre.sub(' - ', file)
+                        file_name = file_name.replace("_"," ").replace(".pdf", "").replace("web","").replace("cm","")
                         files_and_links.append([file_name, current_tp+str(file)])
                     elif os.path.isfile(current_tp+str(file)) and not file.startswith('.'):
                         file_name = file.replace("_"," ")

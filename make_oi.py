@@ -2,6 +2,7 @@
 import dominate
 from dominate.tags import *
 import os
+import re
 
 
 doc = dominate.document(title='OPT INFO')
@@ -9,8 +10,8 @@ doc = dominate.document(title='OPT INFO')
 with doc.head:
     meta(name="title", content="Option informatique")
     meta(name="viewport", content="width=device-width, initial-scale=1")
-    # link(rel='stylesheet', href='style.css')
-    link(rel='stylesheet', href="https://latex.now.sh/style.css")
+    link(rel='stylesheet', href='style.css')
+    #link(rel='stylesheet', href="https://latex.now.sh/style.css")
     link(rel="stylesheet", href="https://latex.now.sh/prism/prism.css")
     link(rel="stylesheet", href="https://latex.now.sh/lang/fr.css")
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.css")
@@ -35,6 +36,7 @@ with doc:
         for i in [['Introduction', 'intro'],['Semestre 2', 's2'], ['Semestre 3', 's3']]:
             li(a(i[0], href='#%s' % i[0]))
 
+nre = re.compile(r"""(_\d+_)""")
 
 # INTRODUCTION
 files_and_links =[]
@@ -66,15 +68,18 @@ for semester in semesters:
                 current_files = sorted(os.listdir(current_tp))
                 for file in current_files:
                     if os.path.isfile(current_tp+str(file)) and file.endswith('.pdf'):
-                        if "solutions" in file:
-                            file_name = "sujet et solutions"
-                        elif "sujet" in file:
-                            file_name = "sujet"
-                        elif "Cours" in file:
-                            file_name = "cours"
-                        else:
-                            pass
+                       # if "solutions" in file:
+                       #     file_name = "sujet et solutions"
+                       # elif "sujet" in file:
+                       #     file_name = "sujet"
+                       # elif "Cours" in file:
+                       #     file_name = "cours"
+                       # else:
+                       #     pass
+                        file_name = nre.sub(' - ', file)
+                        file_name = file_name.replace("_"," ").replace(".pdf", "").replace("web","").replace("cm","")
                         files_and_links.append([file_name, current_tp+str(file)])
+
                 tp_name=str(tpdir).replace("_"," ") 
                 tps[tp_name]=files_and_links
         with doc:

@@ -163,14 +163,17 @@ p {
 }
 
 /* A elements that don't have a class get default styles */
-a:not([class]) {
+/*a:not([class]) {
   text-decoration-skip-ink: auto;
-}
+}*/
 
 /* Make links red */
 a,
+a:link {
+  color: #399FED;
+}
 a:visited {
-  color: #a00;
+  color: #4E1A3D;
 }
 
 a:focus {

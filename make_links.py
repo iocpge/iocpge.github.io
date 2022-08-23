@@ -9,8 +9,8 @@ doc = dominate.document(title='INFO LINKS')
 with doc.head:
     meta(name="title", content="Liens")
     meta(name="viewport", content="width=device-width, initial-scale=1")
-    # link(rel='stylesheet', href='style.css')
-    link(rel='stylesheet', href="https://latex.now.sh/style.css")
+    link(rel='stylesheet', href='style.css')
+    # link(rel='stylesheet', href="https://latex.now.sh/style.css")
     link(rel="stylesheet", href="https://latex.now.sh/prism/prism.css")
     link(rel="stylesheet", href="https://latex.now.sh/lang/fr.css")
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.css")
@@ -43,6 +43,7 @@ titles_and_links.append(("Claire Mathieu - France culture - La méthode scientif
 
 titles_and_links.append(("Gérard Berry -  Série - Où va l'informatique ? - France culture","https://www.radiofrance.fr/franceculture/podcasts/serie-ou-va-l-informatique"))
 
+titles_and_links.append(("Le premier des algorithmes : la numération positionnelle décimale -  Fibonacci, une suite qui vaut de l'or - France culture","https://www.franceculture.fr/emissions/la-methode-scientifique/fibonacci-une-suite-qui-vaut-de-lor"))
 
 with doc:
     with div(id="Podcasts"):
