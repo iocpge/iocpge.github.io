@@ -43,7 +43,7 @@ titles_and_links.append(("Claire Mathieu - France culture - La méthode scientif
 
 titles_and_links.append(("Gérard Berry -  Série - Où va l'informatique ? - France culture","https://www.radiofrance.fr/franceculture/podcasts/serie-ou-va-l-informatique"))
 
-titles_and_links.append(("Le premier des algorithmes : la numération positionnelle décimale -  Fibonacci, une suite qui vaut de l'or - France culture","https://www.franceculture.fr/emissions/la-methode-scientifique/fibonacci-une-suite-qui-vaut-de-lor"))
+titles_and_links.append(("Marc Moyon - Le premier des algorithmes : la numération positionnelle décimale - Fibonacci, une suite qui vaut de l'or - France culture","https://www.franceculture.fr/emissions/la-methode-scientifique/fibonacci-une-suite-qui-vaut-de-lor"))
 
 with doc:
     with div(id="Podcasts"):
