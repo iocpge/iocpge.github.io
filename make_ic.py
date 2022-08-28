@@ -31,7 +31,7 @@ with doc:
         h1("Informatique commune")
         h2("Cours et TP / MPSI, PCSI, MP, PC")
 
-    with div(id='toc').add(ol()):
+    with div(id='toc').add(ul()):
         for i in [['Divers', 'Divers'],['Semestre 1', 's1'], ['Semestre 2', 's2'], ['Semestre 3', 's3']]:
             li(a(i[0], href='#%s' % i[0]))
 
