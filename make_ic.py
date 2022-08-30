@@ -51,7 +51,7 @@ for file in current_files:
 with doc:
     with div(id="Divers"):
         h2("Divers")
-        ul(li(a(file_name, href=link), __pretty=False) for file_name, link in files_and_links)
+        ol(li(a(file_name, href=link), __pretty=False) for file_name, link in files_and_links)
         
         
 # SEMESTERS
