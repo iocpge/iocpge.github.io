@@ -44,7 +44,7 @@ files_and_links =[]
 current_files = sorted(os.listdir("ic/Divers/"))
 for file in current_files:
    if os.path.isfile("ic/Divers/"+str(file)) and file.endswith('.pdf'):
-       file_name = nre.sub(" - ", file)
+       file_name = nre.sub("", file)
        file_name = file_name.replace("_"," ").replace(".pdf", "").replace("web","").replace("cm","")
        files_and_links.append([file_name, "ic/Divers/"+str(file)])
 
