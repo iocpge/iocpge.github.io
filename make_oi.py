@@ -40,11 +40,11 @@ nre = re.compile(r"""(_\d+_)""")
 
 # DIVERS
 files_and_links =[]
-current_files = sorted(os.listdir("optinfo/"))
+current_files = sorted(os.listdir("optinfo/Divers"))
 for file in current_files:
-   if os.path.isfile("optinfo/"+str(file)) and file.endswith('.pdf'):
+   if os.path.isfile("optinfo/Divers/"+str(file)) and file.endswith('.pdf'):
        file_name = str(file).replace("_"," ").replace(".pdf", "")
-       files_and_links.append([file_name, "optinfo/"+str(file)])
+       files_and_links.append([file_name, "optinfo/Divers/"+str(file)])
 
 with doc:
     with div(id="divers"):
