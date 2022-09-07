@@ -33,12 +33,12 @@ with doc:
         h2("Cours et TP / MPSI, MP, MP*")
 
     with div(id='toc').add(ol()):
-        for i in [['Introduction', 'intro'],['Semestre 2', 's2'], ['Semestre 3', 's3']]:
+        for i in [['Divers', 'divers'],['Semestre 2', 's2'], ['Semestre 3', 's3']]:
             li(a(i[0], href='#%s' % i[0]))
 
 nre = re.compile(r"""(_\d+_)""")
 
-# INTRODUCTION
+# DIVERS
 files_and_links =[]
 current_files = sorted(os.listdir("optinfo/"))
 for file in current_files:
@@ -47,9 +47,9 @@ for file in current_files:
        files_and_links.append([file_name, "optinfo/"+str(file)])
 
 with doc:
-    with div(id="Introduction"):
-        h2("Introduction")
-        ul(li(a(file_name, href=link), __pretty=False) for file_name, link in files_and_links)
+    with div(id="divers"):
+        h2("Divers")
+        ol(li(a(file_name, href=link), __pretty=False) for file_name, link in files_and_links)
         
         
 # SEMESTERS
