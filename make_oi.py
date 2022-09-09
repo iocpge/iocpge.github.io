@@ -36,14 +36,16 @@ with doc:
         for i in [['Divers', 'divers'],['Semestre 2', 's2'], ['Semestre 3', 's3']]:
             li(a(i[0], href='#%s' % i[0]))
 
-nre = re.compile(r"""(_\d+_)""")
+nre = re.compile(r"""(_\d+_\d+_)""")
+nredivers = re.compile(r"""(_\d+_)""")
 
 # DIVERS
 files_and_links =[]
 current_files = sorted(os.listdir("optinfo/Divers"))
 for file in current_files:
    if os.path.isfile("optinfo/Divers/"+str(file)) and file.endswith('.pdf'):
-       file_name = str(file).replace("_"," ").replace(".pdf", "")
+       file_name = nredivers.sub("", file)
+       file_name = file_name.replace("_"," ").replace(".pdf", "").replace("web","").replace("cm","")
        files_and_links.append([file_name, "optinfo/Divers/"+str(file)])
 
 with doc:
@@ -76,7 +78,7 @@ for semester in semesters:
                        #     file_name = "cours"
                        # else:
                        #     pass
-                        file_name = nre.sub(' - ', file)
+                        file_name = nre.sub(" - ", file)
                         file_name = file_name.replace("_"," ").replace(".pdf", "").replace("web","").replace("cm","")
                         files_and_links.append([file_name, current_tp+str(file)])
 

@@ -37,7 +37,7 @@ with doc:
 
 
 
-nre = re.compile(r"""(_\d+_)""")
+nre = re.compile(r"""(_\d+_)+""")
 
 # INTRODUCTION
 files_and_links =[]
