@@ -55,7 +55,7 @@ with doc:
         
         
 # SEMESTERS
-semesters = sorted(os.listdir("optinfo/"))
+semesters = sorted([filename for filename in os.listdir("ic/") if filename.startswith("Semestre")])
 for semester in semesters:
     if os.path.isdir("optinfo/"+str(semester)):
         current_sem = "optinfo/"+str(semester)+"/"
