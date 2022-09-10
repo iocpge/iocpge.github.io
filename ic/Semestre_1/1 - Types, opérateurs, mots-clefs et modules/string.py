@@ -12,6 +12,10 @@ from random import shuffle, sample
 
 deck = "78910VDRA"
 print(sample(deck, k=len(deck)))
+deck = [7,8,9,10,"V","D","R","A"]
+shuffle(deck)
+print(deck)
+
 
 from random import randint
 
