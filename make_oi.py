@@ -38,13 +38,14 @@ with doc:
 
 nre = re.compile(r"""(_\d+_\d+_)""")
 nredivers = re.compile(r"""(_\d+_)""")
+lre = re.compile(r"""(_[a-z]+_)""")
 
 # DIVERS
 files_and_links =[]
 current_files = sorted(os.listdir("optinfo/Divers"))
 for file in current_files:
    if os.path.isfile("optinfo/Divers/"+str(file)) and file.endswith('.pdf'):
-       file_name = nredivers.sub("", file)
+       file_name = lre.sub(" - ", file, 1)
        file_name = file_name.replace("_"," ").replace(".pdf", "").replace("web","").replace("cm","")
        files_and_links.append([file_name, "optinfo/Divers/"+str(file)])
 
