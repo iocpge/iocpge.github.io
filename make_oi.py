@@ -80,7 +80,9 @@ for semester in semesters:
                         file_name = nre.sub(" - ", file)
                         file_name = file_name.replace("_"," ").replace(".pdf", "").replace("web","").replace("cm","")
                         files_and_links.append([file_name, current_tp+str(file)])
-
+                    elif os.path.isfile(current_tp+str(file)) and not file.startswith('.'):
+                        file_name = file.replace("_"," ")
+                        files_and_links.append([file_name, current_tp+str(file)])
                 tp_name=str(tpdir).replace("_"," ") 
                 tps[tp_name]=files_and_links
         with doc:
