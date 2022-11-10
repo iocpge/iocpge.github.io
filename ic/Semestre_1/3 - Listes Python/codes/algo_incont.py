@@ -50,7 +50,14 @@ def min_max_index(L):
 
 
 def average(L):
-    return sum(L) / len(L)
+    if len(L) > 0:
+        acc = 0
+        for elem in L:
+            acc +=elem
+        return acc/len(L)
+    else:
+        return None
+
 
 
 # MAIN PROGRAM
