@@ -4,13 +4,17 @@ import math
 def greedy_ccp(M, price):
     solution = {}
     coins_nb = 0
-    M = sorted(M, reverse=True)
-    for m in M:  # greatest value first
+    M = sorted(M)
+    price_done = False
+    while len(M) > 0 and not price_done:
+        m = M.pop()
         nb = price // m  # how many times ?
         if nb > 0:  # if 0, no solution with m
             solution[m] = nb
             price = price - nb * m  # continue...
             coins_nb += nb
+        if price ==0:
+            price_done = True
     if price == 0:  # success
         return [coins_nb, solution]
     else:
@@ -33,16 +37,16 @@ def greedy_rec_ccp(M, price, solution):
 
 def dp_ite_ccp(M, price):
     S = [[[0, {}] for i in range(price + 1)] for i in range(len(M) + 1)]
-    # print(S)
-    for p in range(0, price + 1):  # no coins, no solution
-        S[0][p][0] = math.inf  # !!!! useful for min function
+    # On cherche à connaître la solution optimale ET le détail de la répartition des pièces
+    for p in range(0, price + 1):  # pas  de pièces, pas de solution
+        S[0][p][0] = math.inf      # inf permet d'utiliser la fonction min, None ne le permet pas
 
     for p in range(1, price + 1):
         for i in range(1, len(M) + 1):
             mi = M[i - 1]
             if mi <= p:
-                a = 1 + S[i][p - mi][0]
-                b = S[i - 1][p][0]
+                a = 1 + S[i][p - mi][0]  # with
+                b = S[i - 1][p][0]   # without
                 S[i][p][0] = min(a, b)
                 if a <= b:  # Update dictionary
                     S[i][p][1] = S[i][p][1] | S[i][p - mi][1]
