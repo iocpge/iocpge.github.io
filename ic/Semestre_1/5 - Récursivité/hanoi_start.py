@@ -10,15 +10,15 @@ def draw_stage(k, tower, size):
 
 def show_game(start, aux, target):
     size = max(max(start) if start else 0, max(aux) if aux else 0, max(target) if target else 0)
-    space = " " * (2 * size + 1)
     print()
-    pole = (" " * size + "|" + " " * size)
-    print(f"     {pole * 3}")
+    pole = (" " * size + " |" + " " * size)
+    print("      ", pole*3)
     for k in range(size, 0, -1):
         s = draw_stage(k, start, size)
         a = draw_stage(k, aux, size)
         t = draw_stage(k, target, size)
-        print(f"#{k} : {s}{a}{t}")
+        print("#",k," : ",s,a,t)
+
 
 
 def init_game(n):
