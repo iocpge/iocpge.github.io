@@ -31,7 +31,7 @@ with doc:
         h2("Cours et TP / MPSI, MP, MP*")
 
     with div(id='toc').add(ol()):
-        for i in [['Divers', 'divers'],['Semestre 2', 's2'], ['Semestre 3', 's3']]:
+        for i in [['Divers', 'divers'],['Semestre 2', 's2'], ['Semestre 3', 's3'], ['Semestre 4', 's4']]:
             li(a(i[0], href='#%s' % i[0]))
 
 nre = re.compile(r"""(_\d+_\d+_)""")
