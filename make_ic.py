@@ -32,9 +32,9 @@ with doc.head:
 with doc:
     with div(id="header"):
         h1("Informatique commune")
-        h2("Cours et TP / MPSI, PCSI, MP, PC")
 
     with div(id='toc').add(ol()):
+        h2("Sommaire")
         for i in [['Divers', 'Divers'],['Semestre 1', 's1'], ['Semestre 2', 's2'], ['Semestre 3', 's3']]:
             li(a(i[0], href='#%s' % i[0]))
 
