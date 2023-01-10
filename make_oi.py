@@ -34,7 +34,7 @@ with doc:
         for i in [['Divers', 'divers'],['Semestre 2', 's2'], ['Semestre 3', 's3'], ['Semestre 4', 's4']]:
             li(a(i[0], href='#%s' % i[0]))
 
-nre = re.compile(r"""(_\d+_\d+_)""")
+nre = re.compile(r"""(_\d+_(\d+|[A-Za-z]+)_)""")
 nredivers = re.compile(r"""(_\d+_)""")
 lre = re.compile(r"""(_[a-z]+_)""")
 
