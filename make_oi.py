@@ -37,6 +37,7 @@ with doc:
 nre = re.compile(r"""(_\d+_(\d+|[A-Za-z]+)_)""")
 nredivers = re.compile(r"""(_\d+_)""")
 lre = re.compile(r"""(_[a-z]+_)""")
+yt = re.compile(r"""Screencast-""")
 
 # DIVERS
 files_and_links =[]
@@ -80,6 +81,11 @@ for semester in semesters:
                         file_name = nre.sub(" - ", file)
                         file_name = file_name.replace("_"," ").replace(".pdf", "").replace("web","").replace("cm","")
                         files_and_links.append([file_name, current_tp+str(file)])
+                    elif os.path.isfile(current_tp+str(file)) and file.startswith("Screencast"):
+                        address = file.split("-")[-1]
+                        link= "https://youtu.be/"+address
+                        title = file.split("-")[-2]
+                        files_and_links.append(["Screencast : "+title, link])
                     elif os.path.isfile(current_tp+str(file)) and not file.startswith('.'):
                         file_name = file.replace("_"," ")
                         files_and_links.append([file_name, current_tp+str(file)])
