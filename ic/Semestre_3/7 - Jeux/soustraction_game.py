@@ -1,6 +1,6 @@
 from random import randrange
 
-from cours.Jeux.attractor import attractor
+from TP.TP_Jeux.attractor import attractor
 
 
 def sg_arena(n):
@@ -20,10 +20,15 @@ def is_player(a, p):
 
 
 def next_in_attractor(a, att, p):
+    # print("ATT -> ", att, a[p])
+    v_next = []
     for v in a[p]:
         if v in att:
-            return v
-    return None
+            v_next.append((att[v], v))
+    if v_next:
+        return min(v_next)[1]
+    else:
+        return None
 
 
 def compute_attractors(a, cg1, cg2):
@@ -38,18 +43,18 @@ def compute_attractors(a, cg1, cg2):
 def build_arena(n):
     a = sg_arena(n)
     print("Arena -> ", a)
-    cg1 = {n + 1}
-    cg2 = {0}
+    # cg1 = {n + 1}
+    # cg2 = {0}
     # Misery variation
-    # cg1 = {0, n + 2}
-    # cg2 = {1, n + 1}
+    cg1 = {n + 2}
+    cg2 = {1}
     att1, att2 = compute_attractors(a, cg1, cg2)
     print("Attractors ->", att1, att2)
     assert (len(att1) == len(att2))
-    return a, cg1, cg2, att2, att2
+    return a, cg1, cg2, att1, att2
 
 
-def draw_sticks(p, a, misery=True):
+def draw_sticks(p, a):
     mod = len(a) // 2
     sticks = "\u25AE" * (p % mod)
     print(f"Arena (pos. {p}) : \t {sticks} \t \t (it leaves {len(sticks)} sticks)")
