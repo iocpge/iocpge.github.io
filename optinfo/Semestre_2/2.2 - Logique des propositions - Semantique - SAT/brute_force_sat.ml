@@ -12,9 +12,7 @@ let rec max_var f k = (* k is current index *)
     | T | F -> k
     | Var i -> max i k
     | Not fa -> max_var fa k
-    | And (fa,fb) -> max_var fb (max_var fa k)
-    | Or  (fa,fb) -> max_var fb (max_var fa k)
-    | Imp (fa,fb) -> max_var fb (max_var fa k);;
+    | And (fa,fb) | Or  (fa,fb) | Imp (fa,fb) -> max_var fb (max_var fa k);;
 
 let nb_var f = (max_var f 0) + 1;;
 
