@@ -1,0 +1,27 @@
+#START,STOP         ,km
+Paris   ,Limoges ,393
+Limoges ,Toulouse,290
+Paris   ,Tours   ,240
+Tours   ,Poitiers,105
+Poitiers,Bordeaux,258
+Bordeaux,Bayonne ,184
+Bordeaux,Toulouse,244
+Toulouse,Pau     ,195
+Pau     ,Bayonne ,114
+Bordeaux,Pau     ,216
+Tours   ,Nantes  ,216
+Nantes  ,Vannes  ,113
+Lorient ,Quimper ,69
+Quimper ,Brest   ,71
+Rennes  ,Brest   ,244
+Quimper ,Rennes  ,216
+Vannes  ,Lorient ,60
+Paris   ,Le Mans ,209
+Le Mans ,Tours   ,102
+Tours   ,Rennes  ,254
+Limoges ,Nantes  ,320
+Limoges ,Bordeaux,221
+Poitiers,Nantes  ,217
+Nantes, Rennes, 113
+Rennes, Vannes, 116
+Rennes, Lorient,155
