@@ -1,15 +1,16 @@
 (* Suite de Fibonacci : u0 = 0, u1 = 1 *)
 let fib n =
-  let u = ref 0 and next_u = ref 1 and i = ref 0 in
-  while !i < n do
-    let tmp = !next_u in
-    next_u := !next_u + !u;
-    u := tmp;
-    Printf.printf "%d\n" !next_u; (* permet d'afficher la suite *)
-    incr i;
-  done;
-  !next_u;;
-
+  match n with
+  | 0 -> 0
+  | 1 -> 1
+  | _ -> let u = ref 0 and next_u = ref 1 in
+         for i = 2 to n do
+           let tmpu = !next_u in
+           next_u := !next_u + !u;
+           u := tmpu;
+           Printf.printf "%d\n" !next_u;
+         done;
+         !next_u;;
 fib 10;;
 (* complextié en O(n) *)
 
@@ -24,12 +25,14 @@ rfib 10;;
 
 (* Une suite qui tend vers SQRT(a) u_(n+1) = (u_n  + a/u_n)/2 *)
 let un a n =
-  let i =ref 0 and u = ref 1. in
-  while !i < n do
-    u := 0.5 *. ( !u +. a /. !u);
-    incr i;
-  done;
-  !u;;
+  match n with
+  | 0 -> 1.
+  | _ -> let u = ref 1. and i = ref 0 in
+         while !i < n do
+           u := 0.5 *. (a /. !u +. !u);
+           incr i;
+         done;
+         !u;;
 
 un 2. 100;;
 
@@ -90,7 +93,7 @@ let stddev t =
 
 stddev ad;;
 
-(* renvoyer un tuple *)
+(* renvoyer un tuple  : mettre les parenthèses  *)
 let mstd t =
   let n = Array.length t in
   let m = average t in
@@ -101,4 +104,4 @@ let mstd t =
   done;
   (m,sqrt (!e /. float(n)));;
 
-let (m, ec) = mstd ad;;
+let (m, ec) = mstd ad;; (* parenthèses également pour la déconstruction du tuple *)
