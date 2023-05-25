@@ -7,16 +7,16 @@ let string_to_list s = s |> String.to_seq |> List.of_seq;;
 let string_to_char_list s =  List.of_seq  (String.to_seq s);;
 
 let occurences s =
-    let dict = Hashtbl.create 64 in
+    let dict = Hashtbl.create 64 in (* 64 est un compromis entre 256 et 0 *)
     let n = String.length s in
     for k = 0 to n - 1 do
         let c = s.[k] in
-        if Hashtbl.mem dict c
-        then Hashtbl.replace dict c ((Hashtbl.find dict c) + 1)
-        else Hashtbl.add dict c 1
+        let v = Hashtbl.find_opt dict c in
+        match v with
+        | None -> Hashtbl.add dict c 1
+        | Some n ->  Hashtbl.replace dict c (n + 1)
     done;
     Hashtbl.fold (fun k v acc -> (Leaf k, v) :: acc) dict [];;
-
 
 let compare (_,n1) (_,n2) = 0 ;;
 
