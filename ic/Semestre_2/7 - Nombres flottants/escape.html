@@ -25,14 +25,37 @@
 </head>
    <body>
       <center>
+         <div class="Code">
+            <fieldset>
+               <legend>Classe ?</legend>
+               <input type="radio" name="mpsi" id="mpsi1" value="MPSI1">MPSI1<br>
+               <input type="radio" name="mpsi" id="mpsi2" value="MPSI2">MPSI2<br>
+               <br>
+           </fieldset>
          <input type="password" placeholder="Quel est le code ?" id="escape">
          <button onclick="setthemfree()">VÉRIFIER</button>
          <script>
             function setthemfree() {
-		         const result = hashCode(document.getElementById("escape").value); 
-               //document.write("<center><h1>" +result + "</h1></center>");
-               let passcode = 3292426052; // hash !
-               if (result == passcode) {
+		         const result = hashCode(document.getElementById('escape').value); 
+               var mpsi1 = document.getElementById('mpsi1');
+               var mpsi2 = document.getElementById('mpsi2');
+               //document.write("<center><h1>" + result + "</h1></center>");
+               let passcode = 0;
+               if (mpsi1.checked){
+                   passcode = 3292426052; // hash ! 
+               }
+               else if (mpsi2.checked) {
+                   passcode = 3855970162; // hash !
+               }
+               else {
+                 alert("Il faut choisir une classe...")
+                 location.reload();
+               }
+               if (result == 0){
+                  alert("Il faut fournir un code !")
+                 location.reload();
+               }
+               else if (result == passcode) {
                   document.write("<center><h1>Bonnes vacances !</h1></center>");
                } else {
                  alert("Ce code est incorrect !")
@@ -40,6 +63,7 @@
                }   
             }
          </script>
+         </div>
       </center>
    </body>
 </html>
