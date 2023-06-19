@@ -26,21 +26,22 @@
    <body>
       <center>
          <input type="password" placeholder="Quel est le code ?" id="escape">
-         <button onclick="protectpasscode()">CHECK</button>
+         <button onclick="setthemfree()">CHECK</button>
          <script>
-            function protectpasscode() {
-               const result = document.getElementById("escape").value;
-               let passcode = 12345;
-               let space = '';
-               if (result == space) {
-                  alert("Entrer le code !")
-               } else {
-                  if (result == passcode) {
-                     document.write("<center><h1>Bonnes vacances !</h1></center>");
-                  } else {
-                     alert("Incorrect Passcode");
-                     location.reload();
-                  }
+            function setthemfree() {
+               const result = 3; //hashCode(document.getElementById("escape").value);
+               document.write("<center><h1>"+result+"</h1></center>");
+               //let passcode = 12345;
+               //let space = '';
+               //if (result == space) {
+               //   alert("Entrer le code !")
+               //} else {
+               //   if (result == passcode) {
+               //      document.write("<center><h1>Bonnes vacances !</h1></center>");
+               //   } else {
+               //      alert("Ce code est incorrect !")
+               //      location.reload();
+               //   }
                }
             }
          </script>
