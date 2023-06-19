@@ -18,7 +18,7 @@
     		for (let i = 0, len = str.length; i < len; i++) {
         		let chr = str.charCodeAt(i);
         		hash = (hash << 5) - hash + chr;
-        		hash |= 0; // Convert to 32bit integer
+        		hash = hash >>> 0; // Convert to 32bit integer
     		}
     	      return hash;
     } </script>
@@ -26,23 +26,18 @@
    <body>
       <center>
          <input type="password" placeholder="Quel est le code ?" id="escape">
-         <button onclick="setthemfree()">CHECK</button>
+         <button onclick="setthemfree()">VÉRIFIER</button>
          <script>
             function setthemfree() {
-               const result = 3; //hashCode(document.getElementById("escape").value);
-               document.write("<center><h1>"+result+"</h1></center>");
-               //let passcode = 12345;
-               //let space = '';
-               //if (result == space) {
-               //   alert("Entrer le code !")
-               //} else {
-               //   if (result == passcode) {
-               //      document.write("<center><h1>Bonnes vacances !</h1></center>");
-               //   } else {
-               //      alert("Ce code est incorrect !")
-               //      location.reload();
-               //   }
-               }
+		         const result = hashCode(document.getElementById("escape").value); 
+               //document.write("<center><h1>" +result + "</h1></center>");
+               let passcode = 3292426052; // hash !
+               if (result == passcode) {
+                  document.write("<center><h1>Bonnes vacances !</h1></center>");
+               } else {
+                 alert("Ce code est incorrect !")
+                 location.reload();
+               }   
             }
          </script>
       </center>
