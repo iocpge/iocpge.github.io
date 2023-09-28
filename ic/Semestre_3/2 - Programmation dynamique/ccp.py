@@ -1,54 +1,53 @@
 import math
 
+# PIECES = (5, 1, 2)
+PIECES = (4, 1, 3)
 
-def greedy_ccp(M, price):
+
+def greedy_ccp(prix):
     solution = {}
-    coins_nb = 0
-    M = sorted(M)
-    price_done = False
-    while len(M) > 0 and not price_done:
-        m = M.pop()
-        nb = price // m  # how many times ?
-        if nb > 0:  # if 0, no solution with m
-            solution[m] = nb
-            price = price - nb * m  # continue...
-            coins_nb += nb
-        if price ==0:
-            price_done = True
-    if price == 0:  # success
-        return [coins_nb, solution]
+    nb_de_pieces = 0
+    pieces = sorted(list(PIECES))
+    while len(pieces) > 0 and not prix == 0:
+        m = pieces.pop()  # on prend la valeur la plus grande
+        n = prix // m  # combien de fois ?
+        if n > 0:
+            solution[m] = n
+            prix = prix - n * m  # continue...
+            nb_de_pieces += n
+    if prix == 0:  # success
+        return [nb_de_pieces, solution]
     else:
         return None  # no solution
 
 
-def greedy_rec_ccp(M, price, solution):
-    n = len(M)
-    if price == 0:
+def greedy_rec_ccp(pieces, prix, solution):
+    if prix == 0:
         return solution
-    elif n == 0:
+    elif len(pieces) == 0:
         return solution
     else:
-        m = M.pop()  # choose greatest value, suppose M is sorted
-        nb = price // m  # how many times ?
-        if nb > 0:  # if 0, no solution with m
-            solution[m] = nb
-        return greedy_rec_ccp(M, price - nb * m, solution)  # continue...
+        m = pieces.pop()  # la plus grande valeur
+        n = prix // m  #
+        if n > 0:  # if 0, no solution with m
+            solution[m] = n
+        return greedy_rec_ccp(pieces, prix - n * m, solution)  # continue...
 
 
-def dp_ite_ccp(M, price):
-    S = [[[0, {}] for i in range(price + 1)] for i in range(len(M) + 1)]
+def dp_ite_ccp(n, prix):
+    S = [[[0, {}] for i in range(prix + 1)] for i in range(n + 1)]
     # On cherche à connaître la solution optimale ET le détail de la répartition des pièces
-    for p in range(0, price + 1):  # pas  de pièces, pas de solution
-        S[0][p][0] = math.inf      # inf permet d'utiliser la fonction min, None ne le permet pas
+    for p in range(0, prix + 1):  # pas  de pièces, pas de solution
+        S[0][p][0] = math.inf  # inf permet d'utiliser la fonction min, None ne le permet pas
 
-    for p in range(1, price + 1):
-        for i in range(1, len(M) + 1):
-            mi = M[i - 1]
+    for p in range(1, prix + 1):
+        for i in range(1, n + 1):
+            mi = PIECES[i - 1]
             if mi <= p:
                 a = 1 + S[i][p - mi][0]  # with
-                b = S[i - 1][p][0]   # without
+                b = S[i - 1][p][0]  # without
                 S[i][p][0] = min(a, b)
-                if a <= b:  # Update dictionary
+                if a <= b:  # mis à jour
                     S[i][p][1] = S[i][p][1] | S[i][p - mi][1]
                     if mi in S[i][p][1]:
                         S[i][p][1][mi] += 1
@@ -58,49 +57,29 @@ def dp_ite_ccp(M, price):
                     S[i][p][1] = S[i][p][1] | S[i - 1][p][1]
             else:
                 S[i][p] = S[i - 1][p]
-    return S[len(M)][price]
+    return S[n][prix]
 
 
-def mem_ccp(M, price, mem):
-    n = len(M)
-    if (n, price) in mem:
-        return mem[(n, price)]  # already memorized !
-    if price == 0:
-        return [0, {}]
+def mem_ccp(n, prix, mem):
+    if (n, prix) in mem:
+        return mem[(n, prix)]  # déjà mémorisé
+    if prix == 0:
+        mem[(n, prix)] = 0
+        return mem[(n, prix)]
     elif n == 0:
-        return [math.inf, {}]
+        mem[(n, prix)] = math.inf
+        return mem[(n, prix)]
     else:
-        m = M[0]
-        if m <= price:
-            mem[(n - 1, price - m)] = mem_ccp(M, price - m, mem)  # with
-            mem[(n - 1, price)] = mem_ccp(M[1:], price, mem)  # without
-            if (1 + mem[(n - 1, price - m)][0]) <=  mem[(n - 1, price)][0]:
-                mem[(n, price)] = [mem[(n - 1, price - m)][0] + 1, {m: 1} | mem[(n - 1, price - m)][1]] # merging
-                return mem[(n, price)]
-            else:
-                mem[(n, price)] = mem[(n - 1, price)]
-                return mem[(n, price)]
+        m = PIECES[n-1]
+        if m <= prix:
+            mem[(n, prix)] = min(1 + mem_ccp(n, prix - m, mem), mem_ccp(n - 1, prix, mem))
         else:
-            mem[(n, price)] = mem_ccp(M[1:], price, mem)
-            return mem[(n, price)]
+            mem[(n, prix)] = mem_ccp(n - 1, prix, mem)
+        return mem[(n, prix)]
 
 
 if __name__ == "__main__":
-
-    M = [5, 1, 2]
-    M = [4, 1, 3]
-
-    for P in range(49):
-        s = dp_ite_ccp(M, P)
-        sg = greedy_ccp(M, P)
-        sgr = greedy_rec_ccp(sorted(M[::]), P, {})  # deep copy of M that is destroyed by algorithm
-        sgr_coins_nb = sum(sgr.values())  #  coins number
-        sgr = [sgr_coins_nb, sgr] # to compare with others
-        sm = mem_ccp(M[::], P, {})  # deep copy of M that is destroyed by algorithm
-        try:
-            assert sg[0] == s[0], f"M={M} - Price --> {P} - Optimal : {s} vs  {sg} - Greedy NOT optimal"
-            #assert sgr[0] == s[0], f"M={M} - Price --> {P} - Optimal : {s} vs  {sgr} - Greedy rec NOT optimal"
-            #assert sm[0] == s[0], f"M={M} - Price --> {P} - Optimal : {s} vs  {sm} - Memoization NOT optimal"
-
-        except Exception as e:
-            print(e)
+    print(greedy_ccp(6))
+    print(greedy_rec_ccp(sorted(list(PIECES)), 6, {}))
+    print(dp_ite_ccp(3, 6))
+    print(mem_ccp(3, 6, {}))
