@@ -161,6 +161,16 @@ p {
   -moz-hyphens: auto;
   margin-top: 1rem;
 }
+.videos {
+        display: block;
+	margin-left: 10%;
+      }
+.videos .video {
+    font-weight: normal
+}
+.videos .title{
+    font-weight: bold;		
+}
 
 /* A elements that don't have a class get default styles */
 /*a:not([class]) {
