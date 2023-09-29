@@ -2,11 +2,12 @@ import numpy as np
 
 OBJETS = ((100, 40), (700, 15), (500, 2), (400, 9), (300, 18), (200, 2))
 
-def greedy_kp(n, pmax):  # Greedy select best v first
+
+def glouton_kp(n, pmax):
     poids = 0  # poids total du sac
     valeur = 0  # valeur total du sac
     sac = []  # contenu du sac
-    objets = sorted(list(OBJETS))  # tri ascendant
+    objets = sorted(list(OBJETS))  # tri ascendant en fonction de la valeur
     while len(objets) > 0 and poids <= pmax:
         v, p = objets.pop()  # choix glouton : la valeur la plus grande
         if poids + p <= pmax:  # l'objet peut-il entrer dans le sac
@@ -15,11 +16,12 @@ def greedy_kp(n, pmax):  # Greedy select best v first
             valeur += v
     return sac, poids, valeur
 
-def kp_dp(n, pmax):
+
+def dyn_kp(n, pmax): # Programmation dynamique
     s = np.zeros((n + 1, pmax + 1))
     for i in range(n + 1):
         for p in range(pmax + 1):
-            vi, pi = OBJETS[i - 1]
+            vi, pi = OBJETS[i - 1]  # on considère le nième objet
             if i == 0:
                 s[i, p] = 0  # pas d'objet pas de solution
             elif pi == 0:  # O kg, une solution : ne prendre aucun objet
@@ -31,42 +33,39 @@ def kp_dp(n, pmax):
     return s[n][pmax]
 
 
-def kp_rec(n, pmax):
+def rec_kp(n, pmax):
     if n == 0 or pmax == 0:
         return 0
     else:
-        v, p = OBJETS[n - 1]
+        v, p = OBJETS[n - 1]  # on considère le nième objet
         if p > pmax:
-            return kp_rec(n - 1, pmax)
+            return rec_kp(n - 1, pmax)
         else:
-            return max(v + kp_rec(n - 1, pmax - p), kp_rec(n - 1, pmax))
+            return max(v + rec_kp(n - 1, pmax - p), rec_kp(n - 1, pmax))
 
 
-def kp_mem(n, pmax, S):  # memoïsation
-    if (n, pmax) in S:  # déjà mémorisé
-        return S[(n, pmax)]
+def mem_kp(n, pmax, S):  # récursif avec memoïsation
+    if (n, pmax) in S:
+        return S[(n, pmax)]    # déjà mémorisé
     elif n == 0 or pmax == 0:
-        return 0
+        return 0    # condition d'arrêt
     else:
-        v, p = OBJETS[n - 1]
+        v, p = OBJETS[n - 1] # on considère le nième objet
         if p > pmax:
-            S[(n, pmax)] = kp_mem(n - 1, pmax, S)
+            S[(n, pmax)] = mem_kp(n - 1, pmax, S)
             return S[(n, pmax)]
         else:
-            S[(n, pmax)] = max(v + kp_mem(n - 1, pmax - p, S),
-                               kp_mem(n - 1, pmax, S))
+            S[(n, pmax)] = max(v + mem_kp(n - 1, pmax - p, S),
+                               mem_kp(n - 1, pmax, S))
             return S[(n, pmax)]
-
-
-
 
 
 if __name__ == "__main__":
-    print(greedy_kp(6, 15))
-    print(greedy_kp(6, 11))
-    print(kp_dp(6, 15))
-    print(kp_dp(6, 11))
-    print(kp_rec(6, 15))
-    print(kp_rec(6, 11))
-    print(kp_mem(6, 15, {}))
-    print(kp_mem(6, 11, {}))
+    print(glouton_kp(6, 15))
+    print(glouton_kp(6, 11))
+    print(dyn_kp(6, 15))
+    print(dyn_kp(6, 11))
+    print(rec_kp(6, 15))
+    print(rec_kp(6, 11))
+    print(mem_kp(6, 15, {}))
+    print(mem_kp(6, 11, {}))
