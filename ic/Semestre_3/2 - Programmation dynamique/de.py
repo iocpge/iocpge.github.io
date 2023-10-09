@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def rec_de(a, b):
     if len(a) == 0 or len(b) == 0:
         return max(len(a), len(b))
@@ -33,10 +32,10 @@ def mem_de(a, b, mem):
     else:
         if len(a) == 0 or len(b) == 0:
             mem[(a, b)] = max(len(a), len(b))
-        elif a[0] == b[0]:
-            mem[(a, b)] = mem_de(a[1:], b[1:], mem)
+        elif a[-1] == b[-1]:
+            mem[(a, b)] = mem_de(a[:-1], b[:-1], mem)
         else:
-            mem[(a, b)] = 1 + min(mem_de(a[1:], b, mem), mem_de(a[1:], b[1:], mem), mem_de(a, b[1:], mem))
+            mem[(a, b)] = 1 + min(mem_de(a[:-1], b, mem), mem_de(a[:-1], b[:-1], mem), mem_de(a, b[:-1], mem))
         return mem[(a, b)]
 
 
