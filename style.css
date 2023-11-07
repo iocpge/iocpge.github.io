@@ -728,3 +728,47 @@ h5,
 h6 {
   margin-bottom: 0.8rem;
 }
+
+
+.ribbon-1 {
+  position: fixed;
+  background: #000000;
+  box-shadow: 0 0 0 999px #000000;
+  clip-path: inset(0 -100%);
+}
+.left {
+  inset: 0 auto auto 0;
+  transform-origin: 100% 0;
+  transform: translate(-29.3%) rotate(-45deg);
+}
+.right {
+  inset: 0 0 auto auto;
+  transform-origin: 0 0;
+  transform: translate(29.3%) rotate(45deg);
+}
+
+.ribbon-2 {
+  --f: 10px; /* control the folded part*/
+  --r: 15px; /* control the ribbon shape */
+  --t: 10px; /* the top offset */
+
+  position: absolute;
+  inset: var(--t) calc(-1*var(--f)) auto auto;
+  padding: 0 10px var(--f) calc(10px + var(--r));
+  clip-path:
+    polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+      calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+      var(--r) calc(50% - var(--f)/2));
+  background: #BD1550;
+  box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+}
+
+
+.box {
+  max-width:500px;
+  height:200px;
+  margin:50px auto 0;
+  background:lightblue;
+  position:relative;
+}
+
