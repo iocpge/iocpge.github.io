@@ -191,7 +191,7 @@ body {
   margin: 0 auto;
   padding: 2rem 1.25rem;
 
-  counter-reset: theorem definition sidenote-counter;
+  counter-reset: theorem definition exercise sidenote-counter;
 
   color: var(--body-color);
   background-color: var(--body-bg-color);
@@ -527,6 +527,19 @@ dl dd {
   font-variant-caps: small-caps;
   text-align: center;
 }
+.exercise{
+  counter-increment: exercise;
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+}
+.exercise::before{
+	content: 'Exercice ' counter(exercise) '. ';
+	font-weight: bold;
+	font-style: normal;
+	margin-left: 100px; /* Adjust the value as needed */
+}
+
 
 /* Sidenotes */
 
