@@ -537,7 +537,7 @@ dl dd {
 	content: 'Exercice ' counter(exercise) '. ';
 	font-weight: bold;
 	font-style: normal;
-	margin-left: 100px; /* Adjust the value as needed */
+	margin-left: 40px; /* Adjust the value as needed */
 }
 
 
