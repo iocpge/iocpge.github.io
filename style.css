@@ -191,7 +191,8 @@ body {
   margin: 0 auto;
   padding: 2rem 1.25rem;
 
-  counter-reset: theorem definition exercise sidenote-counter;
+  /* TODO Ajouter un counter pour code */
+  counter-reset: theorem definition chapter cm tp exercise sidenote-counter;
 
   color: var(--body-color);
   background-color: var(--body-bg-color);
@@ -244,6 +245,7 @@ a:focus {
   outline-offset: 2px;
   outline: 2px solid var(--link-focus-outline);
 }
+
 
 /* Make images easier to work with */
 img {
@@ -527,6 +529,71 @@ dl dd {
   font-variant-caps: small-caps;
   text-align: center;
 }
+
+.sem{
+  display: block;
+  font-weight: normal;
+  font-style: normal;
+  font-size : normal;
+}
+
+.chap {
+  counter-increment: chap;
+  display: block;
+  margin: 12px 0;
+  font-weight: bold;
+  font-style: normal;
+  font-size : x-large;
+}
+
+.cm{
+  counter-increment: cm;
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+}
+
+.cm::before{
+  content: 'Cours ' counter(cm) '. ';
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 40px; /* Adjust the value as needed */
+}
+
+.tp{
+  counter-increment: tp;
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+  white-space:nowrap;
+}
+
+.tp::before{
+  content: 'TP ' counter(tp) '.     ';
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 40px; /* Adjust the value as needed */
+}
+
+.corr{
+  margin: 12px 0;
+  white-space:nowrap;}
+
+.file {
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+  font-size: small;
+}
+
+.file::before{
+	content: 'Fichier : ';
+	font-weight: normal;
+	font-style: normal;
+        font-size: small;
+	margin-left: 40px; /* Adjust the value as needed */
+}
+
 .exercise{
   counter-increment: exercise;
   display: block;
@@ -535,7 +602,7 @@ dl dd {
 }
 .exercise::before{
 	content: 'Exercice ' counter(exercise) '. ';
-	font-weight: bold;
+	font-weight: normal;
 	font-style: normal;
 	margin-left: 40px; /* Adjust the value as needed */
 }
