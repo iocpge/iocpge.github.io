@@ -546,6 +546,12 @@ dl dd {
   font-size : x-large;
 }
 
+.divers{
+  font-weight: normal;
+  font-style: normal;
+  font-variant-caps: small-caps;
+}
+
 .cm{
   counter-increment: cm;
   display: block;
@@ -557,6 +563,7 @@ dl dd {
   content: 'Cours ' counter(cm) '. ';
   font-weight: normal;
   font-style: normal;
+  font-variant-caps: small-caps;
   margin-left: 40px; /* Adjust the value as needed */
 }
 
@@ -572,6 +579,7 @@ dl dd {
   content: 'TP ' counter(tp) '.     ';
   font-weight: normal;
   font-style: normal;
+  font-variant-caps: small-caps;
   margin-left: 40px; /* Adjust the value as needed */
 }
 
@@ -590,7 +598,8 @@ dl dd {
 	content: 'Fichier : ';
 	font-weight: normal;
 	font-style: normal;
-        font-size: small;
+    font-size: small;
+    font-variant-caps: small-caps;
 	margin-left: 40px; /* Adjust the value as needed */
 }
 
@@ -604,6 +613,7 @@ dl dd {
 	content: 'Exercice ' counter(exercise) '. ';
 	font-weight: normal;
 	font-style: normal;
+	font-variant-caps: small-caps;
 	margin-left: 40px; /* Adjust the value as needed */
 }
 
