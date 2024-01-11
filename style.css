@@ -620,7 +620,9 @@ dl dd {
 
 /* Sidenotes */
 
-.sidenote {
+.q
+:q!
+sidenote {
   font-size: 0.8rem;
   float: right;
   clear: right;
