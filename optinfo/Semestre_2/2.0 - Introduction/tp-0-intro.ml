@@ -14,7 +14,7 @@ a = 5;;   (* est un booléen !! *)
 b = a;;  (* est un booléen !! *)
 a;;
 a = 4;;  (* est un booléen !! *)
-let a = 5;;   (* une variable immuable ;-) *)
+let a = 5;;   (* une variable immuable --> une expression ;-) *)
 
 let recette = 4000;; (* recette est une variable globale *)
 let budget = let depenses = 3500 in recette - depenses;;
@@ -23,7 +23,7 @@ let budget = let depenses = 3500 in recette - depenses;;
 
 (* programmation impérative ref et tableaux *)
 
-(* références *)
+(* références et effets *)
 let i = ref 0;;
 i;; (* référence *)
 !i;; (* valeur *)
@@ -47,10 +47,10 @@ s.[3];;
 let ch = s ^ " Monsieur !";;   (* concaténation *)
 ch;;
 
-(* structure altenative : renvoie un type : else obligatoire *)
+(* structure altenative : then expression  else expression -->  obligatoire *)
 if true then 1 else 2;; (* pas de else if *)
 if 1 = 2 then "How strange !" else "OK";;
-if true then print_int 3;; (* seul cas où else n'est pas obligatoire : renvoyer unit () *)
+if true then print_int 3;; (* seul cas où else n'est pas obligatoire : si expr de type unit () *)
 
 
 (* boucle for *)
