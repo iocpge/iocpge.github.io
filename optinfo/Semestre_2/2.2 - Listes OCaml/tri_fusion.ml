@@ -3,8 +3,7 @@ let rec fusionner l1 l2 =
     | [], _ -> l2
     | _ , [] -> l1
     | e1 :: t1, e2 :: _  when e1 <= e2 -> e1 :: fusionner t1 l2
-    | _ :: _, e2 :: t2 -> e2 :: fusionner l1 t2
-    ;;
+    | _ :: _, e2 :: t2 -> e2 :: fusionner l1 t2;;
 
 fusionner [] [];;
 fusionner [2] [];;
@@ -13,13 +12,11 @@ let l1 = [3;5;9;15;17;43];;
 let l2 = [2;6;12;24];;
 fusionner l1 l2;;
 
-let partager_en_deux l =
-    let rec aux lst l1 l2 =
-        match lst with
-        | [] -> l1, l2 (* condition d'arrêt *)
-        | [e] -> e::l1, l2  (* condition d'arrêt *)
-        | a :: b :: t -> aux t (a::l1) (b::l2)
-    in aux l [] [];;
+let rec partager_en_deux l =
+        match l with
+        | [] -> [], [] (* condition d'arrêt *)
+        | [e] -> [e], []  (* condition d'arrêt *)
+        | a :: b :: t -> let l1, l2 = partager_en_deux t in  (a::l1), (b::l2);;
 
 partager_en_deux [];;
 partager_en_deux [3];;

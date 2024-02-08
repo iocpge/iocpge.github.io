@@ -2,7 +2,7 @@ let choisir_pivot lst =
       let n = List.length lst in
       if n = 0
       then failwith "Empty list"
-      else List.nth lst (Random.int n);;
+      else List.nth lst (Random.int n);; (* List.nth est en  O(n) *)
 
 let rec partition l pivot =
     match l with
