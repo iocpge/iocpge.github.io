@@ -8,7 +8,7 @@ Proof.
 
   intro HP.     (* P *)
 
-  apply HPiQ in HP. (* \u00e9limination de l'implication *)
+  apply HPiQ in HP. (* utilisation de l'implication *)
 
   contradiction.
 Qed.
