@@ -12,27 +12,27 @@ let rec max_var f k = (* k is current index *)
     | T | F -> k
     | Var i -> max i k
     | Not fa -> max_var fa k
-    | And (fa,fb) -> max_var fb (max_var fa k)
-    | Or  (fa,fb) -> max_var fb (max_var fa k)
-    | Imp (fa,fb) -> max_var fb (max_var fa k)
+    | And (fa,fb) | Or  (fa,fb) | Imp (fa,fb) -> max_var fb (max_var fa k);;
 
+
+(* SMART CONSTRUCTORS *)
 let s_not f =
     match f with
         | F -> T
         | T -> F
-        | _ -> Not f
+        | _ -> Not f;;
 
 let s_and f1 f2 =
-    match (f1, f2) with
+    match f1, f2 with
         | F,_ | _,F -> F
         | T,f | f,T -> f
-        | _,_       -> And (f1,f2)
+        | _,_       -> And (f1,f2);;
 
 let s_or f1 f2 =
     match (f1, f2) with
         | T,_ | _, T -> T
         | F,f | f, F -> f
-        | _,_        -> Or (f1,f2)
+        | _,_        -> Or (f1,f2);;
 
 let s_imp f1 f2 =
     match (f1, f2) with
@@ -40,15 +40,19 @@ let s_imp f1 f2 =
         | _,T  -> T
         | T, f -> f
         | f, F -> s_not f
-        | _,_  -> Imp (f1,f2)
+        | _,_  -> Imp (f1,f2);;
 
-let rec simplify f = match f with
+(* Appliquer les simplications et les smart constructors *)
+let rec simplify f =
+ match f with
   | Var _ | T | F -> f
   | Not f1         -> s_not (simplify f1)
   | And(f1, f2)   -> s_and (simplify f1) (simplify f2)
   | Or(f1, f2)    -> s_or  (simplify f1) (simplify f2)
-  | Imp(f1, f2)   -> s_imp (simplify f1)  (simplify f2)
+  | Imp(f1, f2)   -> s_imp (simplify f1)  (simplify f2);;
 
+
+(* substituer dans une formule logique *)
 let rec subst k r f =
     match f with
       | F                -> F
@@ -58,20 +62,24 @@ let rec subst k r f =
       | Not f            -> Not (subst k r f)
       | And(f1, f2)      -> And(subst k r f1, subst k r f2)
       | Or(f1, f2)       -> Or(subst k r f1, subst k r f2)
-      | Imp(f1, f2)      -> Imp(subst k r f1, subst k r f2)
+      | Imp(f1, f2)      -> Imp(subst k r f1, subst k r f2);;
 
 let rec simple_quine_sat f =
   match simplify f with
       | T -> true
       | F -> false
-      | f -> let v = max_var f 0 in simple_quine_sat (subst v T f) || simple_quine_sat (subst v F f);;
+      | _ -> let v = max_var f 0 in
+              simple_quine_sat (subst v T f) || simple_quine_sat (subst v F f);;
 
 
-let rec quine_sat f valuation =
-  match simplify f with
+let quine_sat f =
+  let rec aux f valuation =
+    match simplify f with
       | T -> List.iter (fun (v,b) -> Printf.printf "%d,%d \t" v b) valuation; print_newline(); true
       | F -> false
-      | f -> let v = max_var f 0 in quine_sat (subst v T f) ((v,1)::valuation) || quine_sat (subst v F f) ((v,0)::valuation);;
+      | sf -> let v = max_var f 0 in aux (subst v T sf) ((v,1)::valuation) || aux (subst v F sf) ((v,0)::valuation)
+  in aux f [];;
+
 
 let f1 = Or ((Var 0),  And ((Var 1),(Var 2)));;
 simplify f1;;
@@ -84,9 +92,13 @@ let c = Imp(Var 0, Var 3);;
 let d = Imp(And(a,b), c);;
 simple_quine_sat f1;;
 simple_quine_sat d;;
-quine_sat f1 [];;
-quine_sat d [];;
+quine_sat f1;;
+quine_sat d;;
 
-let f2 = And ((Var 0),  And (Not (Var 0),(Var 2)));;
+let f2 = And ((Var 0),  And (Not (Var 0),(Var 1)));;
 simple_quine_sat f2;;
+quine_sat f2;;
 
+let f3 = And ((Var 0),  Or (Not (Var 1),(Var 2)));;
+simple_quine_sat f3;;
+quine_sat f3;;

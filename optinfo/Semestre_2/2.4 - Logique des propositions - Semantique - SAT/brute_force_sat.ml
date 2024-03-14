@@ -16,8 +16,13 @@ let rec max_var f k = (* k is current index *)
 
 let nb_var f = (max_var f 0) + 1;;
 
-let get_var_k_from_v v k = Int.logand v (Int.shift_left 1 k) != 0;;
+(* UNE VALUATION EST UN NOMBRE DONT CHAQUE BIT REPRÉSENTE UNE VARIABLE *)
+(* bit à 0 --> faux *)
+(* bit à 1 --> vrai *)
+(* EXEMPLE : 001 -> VAR 0 VRAIE, VAR 1 FAUSSE, VAR 2 FAUSSE *)
+let get_var_k_from_v v k =  v land (1 lsl k) != 0;;
 
+(* ÉVALUER UNE FORMULE LOGIQUE D'APRÈS UNE VALUATION (UN NOMBRE) *)
 let rec evaluation v f =
     match f with
         | T -> true
@@ -28,11 +33,14 @@ let rec evaluation v f =
         | Or (p, q) -> evaluation v p || evaluation v q
         | Imp (p, q) -> not (evaluation v p) || (evaluation v q);;
 
+(* UNE FORMULE EST-ELLE SATISFAISABLE ? *)
+(* EXISTE-T-IL UNE VALUATION POUR LAQUELLE ELLE EST VRAIE ? *)
+(* LES ESSAYER TOUTES ET CONCLURE *)
 let brute_force_satisfiability f =
   let n = nb_var f in
   (* n est le nombre de variables propositionnelles de type int de 0 à n-1 *)
-  let v_limit = Int.shift_left 1 n in
-  (* v_limit = 2^n est la première valuation impossible *)
+  let v_limit = 1 lsl n in
+  (* v_limit = 2^n est la plus petite valuation impossible *)
     let rec check_val valuation =
         match valuation with
             | v when v < v_limit -> if evaluation v f
