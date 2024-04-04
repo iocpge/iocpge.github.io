@@ -1,5 +1,15 @@
 type 'a abr = Vide | Noeud of 'a * 'a abr * 'a abr;;
 
+let rec hauteur t =
+    match t with
+    | Vide -> -1
+    | Noeud(_,g,d) -> 1 + max (hauteur g) (hauteur d);;
+
+let rec taille t =
+    match t with
+    | Vide -> 0
+    | Noeud(_,g,d) -> 1 + (taille g) + (taille d);;
+
 let rec mem x t =
   match t with
   | Vide -> false
@@ -56,6 +66,10 @@ let a = Noeud(5,
                   Noeud(6,Vide, Vide),
                   Noeud(9,Vide, Vide))
           );;
+
+hauteur a;;
+taille a;;
+
 
 mem 6 a;;
 insert 10 a;;

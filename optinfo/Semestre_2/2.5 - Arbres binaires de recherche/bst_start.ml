@@ -1,5 +1,9 @@
 type 'a abr = Vide | Noeud of 'a * 'a abr * 'a abr;;
 
+let rec hauteur t = ();; (* TODO *)
+
+let rec taille t = ();; (* TODO *)
+
 let rec mem x t = ();; (* TODO *)
 
 let rec insert e t =();; (* TODO *)
