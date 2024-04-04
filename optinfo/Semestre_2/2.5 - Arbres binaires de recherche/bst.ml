@@ -1,81 +1,75 @@
-type 'a bst = Empty | Node of 'a * 'a bst * 'a bst;;
+type 'a abr = Vide | Noeud of 'a * 'a abr * 'a abr;;
 
 let rec mem x t =
   match t with
-  | Empty -> false
-  | Node(e,g,d) -> Printf.printf "%d\n" e;
-                   if x < e
-                   then mem x g
-                   else if x > e
-                        then mem x d
-                        else true;;
-
+  | Vide -> false
+  | Noeud(e,g,_) when x = e -> true
+  | Noeud(e,g,_) when x < e -> mem x g
+  | Noeud(e,_,d)  -> mem x d;;
 
 let rec insert e t =
   match t with
-  | Empty -> Node(e, Empty, Empty)
-  | Node(x,g,d) -> if e <= x
-                   then Node(x, insert e g, d)
-                   else Node(x, g, insert e d);;
+  | Vide -> Noeud(e, Vide, Vide)
+  | Noeud(x,g,d) when e <= x -> Noeud(x, insert e g, d)
+  | Noeud(x,g,d) -> Noeud(x, g, insert e d);;
 
 let rec min_elem t =
   match t with
-  | Empty -> failwith "No minimum in an empty tree !"
-  | Node(e, Empty, _) -> e
-  | Node(e,g,d) -> min_elem g;;
-;;
+  | Vide -> failwith "Pas de minimum pour Vide !"
+  | Noeud(e, Vide, _) -> e
+  | Noeud(_,g,_) -> min_elem g;;
 
-(*let rec min_elem t =
+let rec min_elem_o t =
   match t with
-  | Empty -> None
-  | Node(e, Empty, _) -> Some e
-  | Node(e,g,d) -> min_elem g;;
- *)
+  | Vide -> None
+  | Noeud(e, Vide, _) -> Some e
+  | Noeud(_,g,_) -> min_elem_o g;;
 
 let rec remove_min_elem t =
-  match t  with
-  | Empty -> failwith "No minimum in an empty tree !"
-  | Node(_,Empty, d) -> d
-  | Node(e, g,d) -> Node(e, remove_min_elem g, d)
-;;
+  match t with
+  | Vide -> failwith "Pas de minimum pour Vide !"
+  | Noeud(_,Vide, d) -> d
+  | Noeud(e,g,d) -> Noeud(e, remove_min_elem g, d);;
 
-let merge t_inf t_sup =
-  match t_inf, t_sup with
-  | Empty, t | t, Empty -> t
-  | g, d -> Node(min_elem d, g, remove_min_elem d);;
+let merge ag ad =
+  match ag, ad with
+  | Vide, _  -> ad
+  | _ , Vide -> ag
+  | Noeud(_,_,_), Noeud(_,_,_) -> let m = min_elem ad in
+                                  Noeud(m, ag, remove_min_elem ad);;
 
 let rec remove e t =
   match t with
-  | Empty -> failwith "Nothing to remove from an empty tree !"
-  | Node(x,g,d) when x = e -> merge g d
-  | Node(x,g,d) when e < x -> Node(x, remove e g, d)
-  | Node(x,g,d) -> Node(x,g,remove e d);;
+  | Vide -> failwith "Rien à enlever de Vide !"
+  | Noeud(x,g,d) when x = e -> merge g d
+  | Noeud(x,g,d) when e < x -> Noeud(x, remove e g, d)
+  | Noeud(x,g,d) -> Noeud(x,g,remove e d);;
   ;;
 
 
 (* TESTS *)
-let a = Node(5,
-             Node(3,
-                  Node(1, Empty, Empty),
-                  Node(4, Empty, Empty)),
-             Node(8,
-                  Node(6,Empty, Empty),
-                  Node(9,Empty, Empty))
+let a = Noeud(5,
+             Noeud(3,
+                  Noeud(1, Vide, Vide),
+                  Noeud(4, Vide, Vide)),
+             Noeud(8,
+                  Noeud(6,Vide, Vide),
+                  Noeud(9,Vide, Vide))
           );;
 
 mem 6 a;;
 insert 10 a;;
 insert 7 a;;
-min_elem Empty;;
+min_elem Vide;;
 
-try min_elem Empty with
-| Failure "No minimum in an empty tree !" ->  3
+try min_elem Vide with
+| Failure "Pas de minimum pour Vide arbre !" ->  3
 | _ -> 0;;
 
 min_elem a;;
 
 
-let t0 = Empty;;
+let t0 = Vide;;
 let t1 =  insert 50 t0;;
 let t2 =  insert 17 t1;;
 let t3 =  insert 72 t2;;
@@ -113,7 +107,7 @@ let tmm = merge t50 t500;;
 let tr = remove 0 t;;
 
 
-let t0 = Empty;;
+let t0 = Vide;;
 let t1 =  insert 'h' t0;;
 let t2 =  insert 'k' t1;;
 let t3 =  insert 'z' t2;;
