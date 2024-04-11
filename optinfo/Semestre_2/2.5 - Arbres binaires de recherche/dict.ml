@@ -1,5 +1,7 @@
-type ('a,'b) lassoc =  ('a * 'b) list
+(* TAD et structure de données *)
+(* Dictionnaire *)
 
+type ('a,'b) lassoc =  ('a * 'b) list
 let students = [("Émilie", 19);("Elouan",20);("Corentin", 18)];;
 List.assoc "Corentin" students;;
 List.assoc "Zadig" students;;
@@ -13,7 +15,12 @@ List.assoc_opt "Zadig" students;;
 (*Hashtbl.mem  students "Ouassim";;*)
 (*Hashtbl.iter (fun k v -> Printf.printf "%s -> %d ans \n" k v) students;;*)
 
-type label = { key: string; value: int;};;
+type label = { key: string; value: int;};;   (* type enregistrement / record *)
+
+let l1 = {key = "Corentin"; value = 176};;
+l1.key;;
+l1.value;;
+
 type dict =   Vide
             | Noeud of label * dict * dict;;
 
