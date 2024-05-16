@@ -40,33 +40,65 @@ let huffmann_tree occurences =
 
 let string_to_char_list s =  List.of_seq  (String.to_seq s);;
 
+string_to_char_list "Olivier";;
+
+(*let encode_map htree =*)
+(*    let map = Hashtbl.create 64 in*)
+(*    let rec down acc ht =*)
+(*        match ht with*)
+(*        | Leaf c -> Hashtbl.add map c (String.of_seq (List.to_seq (List.rev acc)))*)
+(*        | Node(_, t1, t2) -> down ('0'::acc) t1; down ('1'::acc) t2 in*)
+(*    down [] htree;*)
+(*    map;;*)
+
+
 let encode_map htree =
     let map = Hashtbl.create 64 in
     let rec down acc ht =
         match ht with
-        | Leaf c -> Hashtbl.add map c (String.of_seq (List.to_seq (List.rev acc)))
-        | Node(_, t1, t2) -> down ('0'::acc) t1; down ('1'::acc) t2 in
-    down [] htree;
+        | Leaf c -> Hashtbl.add map c acc
+        | Node(_, t1, t2) -> down (acc^"0") t1; down (acc^"1") t2 in
+    down "" htree;
     map;;
+
+(*let h_encode h_map msg =*)
+(*    let to_encode = string_to_char_list msg in*)
+(*    let rec aux bits to_e =*)
+(*        match to_e with*)
+(*        | [] -> bits*)
+(*        | c::t -> aux (bits ^ (Hashtbl.find h_map c)) t in*)
+(*    aux "" to_encode;;*)
 
 let h_encode h_map msg =
     let to_encode = string_to_char_list msg in
-    let rec aux bits to_e =
+    let rec aux to_e =
         match to_e with
-        | [] -> bits
-        | c::t -> aux (bits ^ (Hashtbl.find h_map c)) t in
-    aux "" to_encode;;
+        | [] -> ""
+        | c::t -> (Hashtbl.find h_map c) ^ (aux  t) in
+    aux to_encode;;
+
+
+(*let h_decode htree msg =*)
+(*    let to_decode = string_to_char_list msg in*)
+(*    let rec down acc ht m =*)
+(*        match (ht, m) with*)
+(*        | (Leaf c, []) -> acc ^ String.make 1 c (* msg done *)*)
+(*        | (Leaf c, r) -> down (acc ^ String.make 1 c) htree r (* restart at root *)*)
+(*        | (Node(_, t1, _), b::q) when b = '0' -> down acc t1 q*)
+(*        | (Node(_, _, t2), b::q) when b = '1' -> down acc t2 q*)
+(*        | _ -> failwith "Decoding error !"  in*)
+(*    down "" htree to_decode;;*)
 
 let h_decode htree msg =
     let to_decode = string_to_char_list msg in
-    let rec down acc ht m =
+    let rec down ht m =
         match (ht, m) with
-        | (Leaf c, []) -> acc ^ String.make 1 c (* msg done *)
-        | (Leaf c, r) -> down (acc ^ String.make 1 c) htree r (* restart at root *)
-        | (Node(_, t1, _), b::q) when b = '0' -> down acc t1 q
-        | (Node(_, _, t2), b::q) when b = '1' -> down acc t2 q
+        | (Leaf c, []) -> String.make 1 c (* msg done *)
+        | (Leaf c, r) ->  String.make 1 c ^ (down htree r) (* restart at root *)
+        | (Node(_, t1, _), b::q) when b = '0' -> down t1 q
+        | (Node(_, _, t2), b::q) when b = '1' -> down t2 q
         | _ -> failwith "Decoding error !"  in
-    down "" htree to_decode;;
+    down htree to_decode;;
 
 let compression_rate text =
     let occ = occurences text in
@@ -82,6 +114,18 @@ let compression_rate text =
 
 
 let cite = "Mississippi";;
+String.length cite;;
+let occ = occurences cite;;
+let q = insert_sort occ;;
+let ht = huffmann_tree q;;
+let hmap = encode_map ht;;
+let ecite = h_encode hmap cite;;
+String.length ecite;;
+let dcite = h_decode ht ecite;;
+compression_rate cite;;
+
+
+let cite = "abracadabra";;
 String.length cite;;
 let occ = occurences cite;;
 let q = insert_sort occ;;
