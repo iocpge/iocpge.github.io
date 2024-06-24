@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IOCPGE</title>
+
+  <meta name="description"
+    content="Tout ce qu'il faut savoir pour réussir l'informatique en CPGE scientifique."/>
+  <meta name="keywords" content="informatique, CPGE, MPSI, PCSI, MP, PC, python, OCaml" />
+
+  <link href="/favicon.ico" rel="icon">
+  <link href="/favicon.svg" rel="icon" type="image/svg+xml">
+  <link href="/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="prism/prism.css" />
+  <link rel="stylesheet" href="lang/fr.css" />
+   <!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-3H3E9H7Z78"></script>
+	<script>
+  	window.dataLayer = window.dataLayer || [];
+  	function gtag(){dataLayer.push(arguments);}
+  	gtag('js', new Date());
+  	gtag('config', 'G-3H3E9H7Z78');
+	</script>
+</head>
+
+<body id="top">
+
+	<div class="ribbon-1 left"><font color="#FFFFFF">Je suis Samuel</font></div>
+        <div class="ribbon-1 right">J<font color="#FFFFFF">Je suis Dominique</font></div>
+
+  <header>
+    <h1>Informatique</h1>
+    <p class="author">
+      Olivier Reynet <br />
+	Lycée La Pérouse - Kerichen, Brest
+    </p>
+  </header>
+
+  <div class="abstract">
+    <h2>Résumé</h2>
+    <p>
+    Tout ce qu'il faut savoir pour réussir l'informatique en CPGE scientifique. 
+    </p>
+  </div>
+
+  <nav role="navigation" class="toc">
+    <h2>Sommaire</h2>
+    <div class="divers">
+      <ol>
+        <li>
+          <a href="ic.html">Informatique commune</a>
+        </li>
+        <li>
+          <a href="oi.html">Option informatique (MPSI/MP/MP*)</a>
+        </li>
+        <li>
+          <a href="links.html">Podcasts et liens intéressants</a>
+        </li>
+      </ol>
+    </div> 
+    </div>
+</body>
+
+</html>
