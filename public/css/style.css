@@ -3,10 +3,11 @@
 :root {
   --slate-300: #cbd5e1;
   --slate-600: #475569;
-  --amber-100: #fef3c7;
-  --amber-600: #d97706;
-  --amber-700: #b45309;
-  --amber-800: #92400e;
+  --ambre-100: #fef3c7;
+  --red:  #ff2768;
+  --cturq: #40E0D0;
+  --carafe: #4e1a3d;
+
   --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
     0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
@@ -87,26 +88,27 @@ a {
   flex-wrap: wrap;
   margin-bottom: 4rem;
   padding: 1rem 1.5rem;
+  background-color: white;
 }
 
 .header__title {
   position: relative;
   margin-bottom: 1rem;
   margin-right: 1rem;
-  color: var(--amber-600);
+  color: black;
 }
 
 .header__links {
   display: flex;
   gap: 2rem;
-  font-size: 1.125rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  color: var(--amber-700);
+  color: var(--red);
 }
 
 .header__link {
   position: relative;
-  font-size: 1.125rem;
+  font-size: 1.1rem;
 }
 
 .header__link::after {
@@ -116,7 +118,7 @@ a {
   height: 2px;
   width: 100%;
   position: absolute;
-  background-color: var(--amber-700);
+  background-color: var(--carafe);
   transform: scaleX(0);
   transition: transform 0.3s ease 0s;
 }
@@ -127,99 +129,57 @@ a {
 
 .footer {
   flex-shrink: 0;
-  width: 100%;
+  width: 95%;
   padding: 0.5rem 0;
-  text-align: center;
+  text-align: right;
+  font-size: 0.5rem;
 }
 
 .heading--main {
   padding: 1rem 0;
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--amber-600);
+  color: var(--cyan-600);
 }
 
-/* Profile Styles */
-.profile {
-  display: flex;
-  flex-direction: column;
-}
+/* Semestres  Styles */
 
-.profile__image-wrapper picture {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-.profile__image-wrapper img {
-  width: 250px;
-  height: 250px;
-  border-radius: 9999px;
-}
-
-.profile__card {
-  display: flex;
-  flex-direction: column;
-  padding: 4rem 0;
-  flex: 1;
-}
-
-.profile__text {
-  margin-bottom: 1rem;
-  color: var(--slate-600);
-}
-
-.profile__text--lead {
-  font-weight: 500;
-  font-size: 1.5rem;
-}
-
-.profile__text--highlight {
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: var(--amber-600);
-}
-
-.profile__text--emphasis {
-  font-weight: bold;
-  font-size: 1.125rem;
-}
-
-.profile__link {
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-/* Technologies Styles */
-
-.technologies__heading {
+.semestre__heading {
+  margin-left: 10%;
   margin-bottom: 1.5rem;
   padding: 1rem 0;
-  font-size: 2.5rem;
-  text-align: center;
+  font-size: 1.5rem;
+  text-align: left;
   font-weight: 700;
-  color: var(--amber-600);
+  color: black;
 }
 
-.technologies__list {
-  width: 100%;
+/* Cours Styles */
+
+.cours__heading {
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  font-size: 2.rem;
+  text-align: center;
+  font-weight: 700;
+  color: var(--cturq);
+}
+
+.cours__list {
   max-width: 36rem;
   margin: 0 auto;
-  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
   gap: 1.5rem;
 }
 
-.technologies__item {
+.cours__item {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: left;
 }
 
-.technologies__logo {
+.cours__logo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -228,7 +188,7 @@ a {
   margin-bottom: 0.5rem;
 }
 
-.technologies__title {
+.cours__title {
   font-weight: 400;
   color: var(--slate-600);
 }
@@ -244,14 +204,14 @@ a {
   font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
-  color: var(--amber-600);
+  color: var(--cyan-600);
 }
 
 .project__heading {
   padding: 1rem 0;
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--amber-600);
+  color: var(--cyan-600);
 }
 
 .project-grid {
@@ -303,8 +263,8 @@ a {
   padding: 0.25rem 0.5rem;
   border-radius: 9999px;
   font-size: 0.75rem;
-  background-color: var(--amber-100);
-  color: var(--amber-800);
+  background-color: var(--cyan-100);
+  color: var(--cyan-800);
 }
 
 .project-card__summary {
@@ -316,7 +276,7 @@ a {
   display: inline-flex;
   align-items: center;
   font-weight: 600;
-  color: var(--amber-700);
+  color: var(--cyan-700);
 }
 
 .project-card__link-icon {
@@ -363,7 +323,7 @@ a {
 .prose h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  color: var(--amber-600);
+  color: var(--cyan-600);
 }
 
 .prose ul {
@@ -438,12 +398,12 @@ a {
   border-radius: 0.25rem;
   cursor: pointer;
   color: #fff;
-  background-color: var(--amber-600);
+  background-color: var(--cyan-600);
   transition: background-color 0.3s ease;
 }
 
 .form__button:hover {
-  background-color: var(--amber-600);
+  background-color: var(--cyan-600);
 }
 
 @media (min-width: 640px) {
@@ -451,11 +411,11 @@ a {
     margin-bottom: 0;
   }
 
-  .profile {
+  .cours {
     flex-direction: row;
   }
 
-  .profile__image-wrapper img {
+  .cours__image-wrapper img {
     margin: 4rem;
   }
 }
