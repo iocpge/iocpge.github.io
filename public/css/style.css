@@ -23,7 +23,7 @@
 }
 
 
- section, article {text-align: left; margin-left: 10%;}
+ section, article {text-align: left; margin-left: 10%; margin-top: 1cm; margin-bottom:1cm;}
 
 
 html:focus-within {
@@ -63,8 +63,24 @@ select {
 a {
   text-decoration: none;
   color: var(--red);
-  font-weight: 600;
+  font-weight: 500;
 }
+
+u.item {
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+ul.lo  li::marker {
+  content: '✓';
+  color: var(--cturq);
+}
+
+ul.cours {
+  list-style-type: square; 
+}
+
+ul.cours li {margin-bottom:10px;}
 
 /* Utility Classes */
 
