@@ -23,7 +23,7 @@
 }
 
 
- section, article {text-align: left; margin-left: 10%; margin-top: 1cm; margin-bottom:1cm;}
+section, article {text-align: left; margin-left: 10%; margin-top: 1cm; margin-bottom:1cm;}
 
 
 html:focus-within {
@@ -66,23 +66,86 @@ a {
   font-weight: 500;
 }
 
+
+ul.lo  li{
+  font-size: 1rem;
+}
+
+ul.lo  li::marker {
+  content: '✓    ';
+  color: var(--cturq);
+  font-weight: bold;
+}
+
+ul.video  li{
+  font-size: 1rem;
+}
+
+ul.video li::marker {
+  content: '\1F3A5    ';
+  color: var(--cturq);
+  font-weight: bold;
+}
+
+ul.activity  li{
+  font-size: 1rem;
+}
+
+ul.activity li::marker {
+  content: '\1F680    ';
+  color: var(--cturq);
+  font-weight: bold;
+}
+
+ul.cours  li{
+  font-size: 1rem;
+}
+
+ul.cours li::marker {
+  content: '\1F4D9    ';
+  color: var(--cturq);
+  font-weight: bold;
+}
+
+ul.tp  li{
+  font-size: 1rem;
+}
+
+ul.tp li::marker {
+  content: '\1F4BB    ';
+  color: var(--cturq);
+  font-weight: bold;
+}
+
+ul.chap {
+  list-style-type: square; 
+}
+
+ul.chap li {  
+  margin-top: 10px;
+  margin-bottom:10px;}
+
+
+ul.semestre {
+    font-weight: 500;
+  }
+  
+ul.semestre li {  
+    margin-top: 10px;
+    margin-bottom:10px;}
+  
+ul.semestre li::marker {
+      content: '\25B6    ';
+      color: var(--cturq);
+      font-weight: bold;
+    }
+
+/* Utility Classes */
+
 u.item {
   text-decoration: underline;
   font-weight: 500;
 }
-
-ul.lo  li::marker {
-  content: '✓';
-  color: var(--cturq);
-}
-
-ul.cours {
-  list-style-type: square; 
-}
-
-ul.cours li {margin-bottom:10px;}
-
-/* Utility Classes */
 
 .container {
   max-width: 64rem;
@@ -100,14 +163,14 @@ ul.cours li {margin-bottom:10px;}
 
 /* NAV */
 
-nav {margin-left: 5%; background-color: #475569;}
+nav { background-color: black;}
 
 nav ul {
+  margin-left: 0%;
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  /* background-color: white; */
 }
 
 nav li {
@@ -122,7 +185,7 @@ nav li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  transition: .25s; /* temps de transition lors du hover : une demi seconde */
+  transition: .25s; /* temps de transition lors du hover */
 }
 
 nav li a:hover{
