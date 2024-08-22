@@ -23,7 +23,7 @@
 }
 
 
-section, article {text-align: left; margin-left: 10%; margin-top: 1cm; margin-bottom:1cm;}
+section, article {text-align: left; margin-left: 10%; margin-top: 0.6cm; margin-bottom:0.6cm;}
 
 
 html:focus-within {
