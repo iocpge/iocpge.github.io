@@ -104,10 +104,11 @@ def strategie_gloutonne(plateau, joueur):
     pass # TODO
 
 
-# Minimax pur (sans heuristique)
+# Minimax
 def minimax(plateau, joueur, heuristique, maximisant=True, profondeur=4):
     pass # TODO
 
+# Minimax avec élagage
 def minimax_ab(plateau, joueur, heuristique, maximisant=True, profondeur=4, alpha=-math.inf, beta=math.inf):
     pass # TODO
 
@@ -119,9 +120,6 @@ def strategie_minimax(plateau, joueur, heuristique, profondeur=4):
 
 def h_simple(plateau, joueur):
     pass # TODO
-
-
-
 
 
 
