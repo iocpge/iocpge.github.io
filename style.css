@@ -1,0 +1,242 @@
+/* CSS Variables */
+
+:root {
+  --slate-300: #cbd5e1;
+  --slate-600: #475569;
+  --ambre-100: #fef3c7;
+  --red:  #ff2768;
+  --cturq: #40E0D0;
+  --carafe: #4e1a3d;
+
+  --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* CSS Normalization */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+section, article {text-align: left; margin-left: 10%; margin-top: 0.3cm; margin-bottom:0.3cm;}
+
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100%;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+ul,
+ol {
+  margin-left: 0;
+  padding-left: 40px;
+}
+li {
+}
+img,
+picture {
+  width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: var(--red);
+  font-weight: 500;
+}
+
+
+ul.lo  li{
+  font-size: 1rem;
+}
+
+ul.lo  li::marker {
+  content: '✓    ';
+  color: var(--cturq);
+  font-weight: bold;
+}
+
+ul.video  li{
+  font-size: 1rem;
+}
+
+ul.video li::marker {
+  content: '\1F3A5    ';
+  color: var(--cturq);
+  font-weight: bold;
+}
+
+ul.activity  li{
+  font-size: 1rem;
+}
+
+ul.activity li::marker {
+  content: '\1F680    ';
+  color: var(--cturq);
+  font-weight: bold;
+}
+
+ul.cours  li{
+  font-size: 1rem;
+}
+
+ul.cours li::marker {
+  content: '\1F4D9    ';
+  color: var(--cturq);
+  font-weight: bold;
+}
+
+ul.tp  li{
+  font-size: 1rem;
+}
+
+ul.tp li::marker {
+  content: '\1F4BB    ';
+  color: var(--cturq);
+  font-weight: bold;
+}
+
+ul.chap {
+  list-style-type: square; 
+}
+
+ul.chap li {  
+  margin-top: 10px;
+  margin-bottom:10px;}
+
+
+ul.semestre {
+    font-weight: 500;
+  }
+  
+ul.semestre li {  
+    margin-top: 7px;
+    margin-bottom:7px;}
+  
+ul.semestre li::marker {
+      content: '\25B6    ';
+      color: var(--cturq);
+      font-weight: bold;
+    }
+
+/* Utility Classes */
+
+u.item {
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.container {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* NAV */
+
+nav { background-color: black;}
+
+nav ul {
+  margin-left: 0%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav li {
+  float: left;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: .25s; /* temps de transition lors du hover */
+}
+
+nav li a:hover{
+  background: var(--red); 
+  color: white; 
+  }
+
+/* footer */
+
+footer {font-size: 0.5rem; text-align: right; margin-right: 5%;}
+
+
+  /* OLD STUFF */
+.ribbon-1 {
+  position: fixed;
+  background: #000000;
+  box-shadow: 0 0 0 999px #000000;
+  clip-path: inset(0 -100%);
+}
+.left {
+  inset: 0 auto auto 0;
+  transform-origin: 100% 0;
+  transform: translate(-29.3%) rotate(-45deg);
+}
+.right {
+  inset: 0 0 auto auto;
+  transform-origin: 0 0;
+  transform: translate(29.3%) rotate(45deg);
+}
+
+.ribbon-2 {
+  --f: 10px; /* control the folded part*/
+  --r: 15px; /* control the ribbon shape */
+  --t: 10px; /* the top offset */
+
+  position: absolute;
+  inset: var(--t) calc(-1*var(--f)) auto auto;
+  padding: 0 10px var(--f) calc(10px + var(--r));
+  clip-path:
+    polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+      calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+      var(--r) calc(50% - var(--f)/2));
+  background: #BD1550;
+  box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+}
+
+
+.box {
+  max-width:500px;
+  height:200px;
+  margin:50px auto 0;
+  background:lightblue;
+  position:relative;
+}
