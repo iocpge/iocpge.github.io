@@ -21,17 +21,16 @@ let synth solutions =
 
 let n_queens n =
   let rec build_solutions row current_board = 
-      if row = n  (* On a trouvé une solution *)
+    if row = n  (* On a trouvé une solution *)
       then [current_board] (* On la renvoie dans une liste *)
-      else 
+      else (* Trouver toutes les solutions possibles en construisant toutes les nouvelles lignes possibles *)
         let rec build_line_with c solutions =
-          if c = n 
-          then solutions 
-          else
-              if not (under_attack row c current_board) 
-              then let new_solutions = build_solutions (row+1) (current_board @ [c]) in
-                   build_line_with (c+1) solutions @ new_solutions 
-              else build_line_with (c+1) solutions
+          (* Si c = n : on a testé toutes les colonnes possibles  pour l'ajout d'une reine *)
+          (* Alors on renvoie la liste des solutions possibles *)
+          (* Sinon *)
+               (* Si on peut mettre une reine en c *)
+               (* Alors construire toutes les solutions possibles avec une reine en c et les ajouer à solutions *)
+               (* Sinon essayer en c + 1 *)
       in build_line_with 0 []
    in build_solutions 0 [];;
 
