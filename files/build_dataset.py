@@ -3,10 +3,10 @@ from random import random
 
 
 def import_csv(filename):
-    file = open(filename, 'r')
-    headers = file.readline()
-    lines = file.readlines()
-    file.close()
+    with open(filename, 'r') as file:
+        # cettes syntaxe ferme le fichier même si une exception est levée ;-)
+        headers = file.readline()
+        lines = file.readlines()
     E = []
     C = []
     for line in lines:
@@ -23,6 +23,7 @@ def mixid(E, C):
     zipped = list(zip(E, C))
     random.shuffle(zipped)
     E, C = zip(*zipped)
+    E, C = list(E), list(C)
     return E, C
 
 
