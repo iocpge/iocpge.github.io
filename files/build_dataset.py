@@ -1,10 +1,10 @@
 import math
-from random import random
+import random
 
 
 def import_csv(filename):
     with open(filename, 'r') as file:
-        # cettes syntaxe ferme le fichier même si une exception est levée ;-)
+        # cette syntaxe ferme le fichier même si une exception est levée ;-)
         headers = file.readline()
         lines = file.readlines()
     E = []
@@ -35,3 +35,10 @@ def split_train_test(E, C, ratio):
     Ytrain = C[:stop]
     Ytests = C[stop:]
     return Xtrain, Ytrain, Xtests, Ytests
+
+
+if __name__=="__main__":
+    E,C = import_csv('iris.csv')
+    E, C = mixid(E, C)  # mélanger le jeu de données
+    Xtrain, Ytrain, Xtests, Ytests = split_train_test(E, C, 0.7)
+    print(len(Xtrain), len(Ytrain), len(Xtests), len(Ytests))
