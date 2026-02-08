@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Tout ce qu'il faut savoir pour réussir l'informatique en CPGE scientifique."/>
+	<meta name="keywords" content="informatique, CPGE, MPSI, PCSI, MP, PC, python, OCaml" />
+	<link href="/favicon.ico" rel="icon">
+	<link href="/favicon.svg" rel="icon" type="image/svg+xml">
+	<link href="/apple-touch-icon.png" rel="apple-touch-icon">
+	<link rel="stylesheet" href="/style.css" />
+
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-3H3E9H7Z78"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-3H3E9H7Z78');
+	</script>
+	<title>IOCPGE</title>
+	</head>
+
+	<body>
+
+		<!-- <div class="ribbon-1 left"><font color="#FFFFFF">Je suis Samuel</font></div>
+		<div class="ribbon-1 right"><font color="#FFFFFF">Je suis Dominique</font></div> -->
+	  <header>
+		<nav>
+			<ul>
+				<li>
+					<a href="/"><img src="/favicon.svg" width="32" height="32" alt="Logo"></a>
+				</li>
+				<li>
+					<a href="/itc_index/index.html">ITC</a>
+				</li>
+				<li>
+					<a href="/oi_index/index.html">Option</a>
+				</li>
+			</ul>
+		</header>
+
+
+		
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/eclipse.min.css">
+  <link rel="stylesheet" href="/assets/css/ocaml-editor.css">
+
+
+<section>
+<h1>La Récursivité</h1> <br>
+<ul class="chap">
+    
+    
+    
+
+    
+
+    
+
+    
+    
+    <li>
+        <u class="item">Exercice Interactif</u> :
+        <div class="ocaml-playground">
+            <h3>Exercice : La Factorielle</h3>
+            <p>Écrivez une fonction <code>fact</code> qui calcule la factorielle de n. <br>Exemple : fact 5 doit renvoyer 120.</p>
+
+            <textarea id="ocaml-code-area">let rec fact n =
+  (* À compléter *)
+  0
+;;
+
+print_int (fact 5);;
+</textarea>
+            
+            <div class="ocaml-controls">
+                <button class="btn-ocaml btn-run" onclick="runOCamlCode()">▶ Exécuter</button>
+                <button class="btn-ocaml btn-reset" onclick="resetOCamlCode()">↺ Reset</button>
+                
+                <button class="btn-ocaml btn-sol" onclick="toggleSolution()">💡 Voir Solution</button>
+                
+            </div>
+
+            <div id="output-console">Résultat...</div>
+            
+            
+            <div id="solution-box" class="hidden">
+                <strong>Solution :</strong>
+                <pre>let rec fact n =
+  if n = 0 then 1
+  else n * fact (n-1)
+;;
+</pre>
+            </div>
+            
+        </div>
+    </li>
+    
+
+    
+    
+
+    
+</ul>
+</section>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/mllike/mllike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+
+<script src="/assets/js/ocaml_runner.js"></script> <script src="/assets/js/ocaml-client.js"></script>   <script>
+    // Initialisation au chargement de la page
+    document.addEventListener("DOMContentLoaded", function() {
+        initOCamlEditor("ocaml-code-area");
+    });
+</script>
+
+
+
+
+
+		<footer class="footer">
+			<p>En l'an 2026, Olivier Reynet - Lycée La Pérouse - Kerichen - Brest </p>
+		  </footer>
+	</body>
+</html>
