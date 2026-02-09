@@ -42,8 +42,8 @@
 /* Panneau Droit : Sortie / Toplevel */
 .right-panel {
     width: 25%;
-    /* background: #2d2d2d; */
-    /* color: #f8f8f2; */
+    background: black; 
+    color: white; 
     font-family: 'Consolas', 'Monaco', monospace;
     font-size: 0.9rem;
     display: flex;
@@ -75,12 +75,11 @@ details { margin-top: 1em; cursor: pointer; }
 .cm-error-underline {
     text-decoration: underline;
     text-decoration-style: wavy;
-    text-decoration-color: red;
-    /* Fallback pour vieux navigateurs si nécessaire: border-bottom: 2px dotted red; */
+    text-decoration-color:#f92672;
 }
 
 /* Ajustement visuel pour le thème sombre */
 .cm-s-material-palenight span.cm-error-underline {
-    text-decoration-color: #ff5f5f; 
+    text-decoration-color: #f92672; 
 }
 

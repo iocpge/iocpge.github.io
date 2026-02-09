@@ -70,12 +70,7 @@ let () =
 
 
 <script>
-    var outputDiv =  CodeMirror.fromTextArea(document.getElementById('output'), {
-        mode: 'text/x-ocaml',
-        lineNumbers: true,
-        matchBrackets: true,
-        theme: 'material-palenight'
-    });
+    var outputDiv =  document.getElementById('output');
 
     var editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
         mode: 'text/x-ocaml',
