@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <title>Suite</title>
     <link rel="stylesheet" href="/codemirror.css">
-    <!-- <link rel="stylesheet" href="/ocaml-style.css"> -->
-    <link rel="stylesheet" href="/ex_ocaml.css">
+    <link rel="stylesheet" href="/ocaml-style.css">
+    <!-- <link rel="stylesheet" href="/ex_ocaml.css"> -->
+    <script src="/codemirror.js"></script>
+    <script src="/matchbrackets.js"></script>
+    <script src="/mllike.js"></script>
+    <script src="/toplevel.js"></script> 
+
 </head>
 <body>
 
@@ -88,10 +93,6 @@ done;;
     </div>
 </div>
 
-<script src="/codemirror.js"></script>
-<script src="/matchbrackets.js"></script>
-<script src="/mllike.js"></script>
-<script src="/toplevel.js"></script> 
 
 <script>
     // Configuration de l'éditeur
@@ -99,7 +100,7 @@ done;;
         mode: 'text/x-ocaml',
         lineNumbers: true,
         matchBrackets: true,
-        theme: 'default'
+        theme: 'material-palenight'
     });
 
     var outputDiv = document.getElementById('output');
@@ -121,7 +122,7 @@ done;;
 
     // Chargement dynamique du script toplevel pour éviter de bloquer la page
     var script = document.createElement('script');
-    script.src = "/assets/js/vendor/toplevel.js";
+    script.src = "toplevel.js";
     script.onload = function() {
         log("OCaml prêt. Cliquez sur Exécuter.", "success");
     };
