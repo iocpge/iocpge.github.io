@@ -19,11 +19,18 @@
 }
 
 /* Panneau Central : Éditeur */
+
+.main-content-area {
+    width: 75%;
+    display: flex;
+    flex-direction: column; /* Aligne l'éditeur et la sortie verticalement */
+}
+
 .center-panel {
-    width: 45%;
+    flex: 1; /* Prend l'espace disponible en haut */
     display: flex;
     flex-direction: column;
-    border-right: 2px solid #ddd;
+    border-bottom: 4px solid #ddd; /* Séparation avec la sortie */
 }
 
 .editor-toolbar {
@@ -35,14 +42,14 @@
 }
 
 .CodeMirror {
+    flex-grow: 1;
     height: 100%;
     font-size: 14px;
 }
 
-/* Panneau Droit : Sortie / Toplevel */
-.right-panel {
-    width: 25%;
-    background: black; 
+.bottom-panel {
+    height: 25%; /* Hauteur de la zone de log */
+    background: #1e1e1e; /* Noir légèrement adouci */
     color: white; 
     font-family: 'Consolas', 'Monaco', monospace;
     font-size: 0.9rem;
@@ -54,6 +61,7 @@
     flex-grow: 1;
     white-space: pre-wrap;
     padding: 10px;
+    overflow-y: auto;
 }
 
 .success { color: #a6e22e; }
