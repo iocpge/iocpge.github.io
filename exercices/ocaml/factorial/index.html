@@ -15,6 +15,22 @@
     <script src="/mllike.js"></script>
     <script src="/toplevel.js"></script> 
 
+<style>
+        /* 2. Style pour la vaguelette rouge */
+        .cm-error-underline {
+            text-decoration: underline;
+            text-decoration-style: wavy;
+            text-decoration-color: red;
+            /* Fallback pour vieux navigateurs si nécessaire: border-bottom: 2px dotted red; */
+        }
+        
+        /* Ajustement visuel pour le thème sombre */
+        .cm-s-material-palenight span.cm-error-underline {
+            text-decoration-color: #ff5f5f; 
+        }
+    </style>
+
+
 <div class="exercise-container">
     <div class="panel left-panel">
         <h1>Factorielle</h1>
@@ -69,20 +85,61 @@ let () =
 
 
 <script>
+    var outputDiv = document.getElementById('output');
+
     var editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
         mode: 'text/x-ocaml',
         lineNumbers: true,
         matchBrackets: true,
-        theme: 'material-palenight'
+        theme: 'material-palenight' // Cela fonctionnera maintenant grâce au CSS
     });
   
-    var outputDiv = document.getElementById('output-log');
     var runBtn = document.getElementById('run-btn');
+    
+    // Variable pour stocker les marqueurs d'erreurs actuels
+    var errorMarks = [];
 
-    // Cette fonction est appelée AUTOMATIQUEMENT par OCaml quand il y a un print
+    // Fonction pour nettoyer les soulignements précédents
+    function clearErrors() {
+        errorMarks.forEach(mark => mark.clear());
+        errorMarks = [];
+    }
+
+    // Fonction pour analyser le texte d'erreur OCaml et souligner
+    function highlightError(msg) {
+        // Regex pour capturer: "line X, characters Y-Z"
+        // Le format standard OCaml est souvent: File "...", line 2, characters 4-15:
+        var regex = /line (\d+), characters (\d+)-(\d+)/;
+        var match = msg.match(regex);
+
+        if (match) {
+            // OCaml compte les lignes à partir de 1, CodeMirror à partir de 0 -> on fait -1
+            var line = parseInt(match[1], 10) - 1;
+            var chStart = parseInt(match[2], 10);
+            var chEnd = parseInt(match[3], 10);
+
+            // Création du marqueur
+            var mark = editor.markText(
+                {line: line, ch: chStart},
+                {line: line, ch: chEnd},
+                {
+                    className: "cm-error-underline",
+                    title: msg, // Affiche l'erreur au survol de la souris
+                    clearOnEnter: true // Efface le soulignement dès que l'élève modifie la zone
+                }
+            );
+            errorMarks.push(mark);
+        }
+    }
+
     window.ocaml_log = function(type, msg) {
         if (!msg || msg.trim() === "") return;
         
+        // Si c'est une erreur (stderr), on tente de la souligner dans l'éditeur
+        if (type === 'stderr') {
+            highlightError(msg);
+        }
+
         var el = document.createElement('div');
         el.textContent = msg;
         el.className = (type === 'stderr') ? 'error' : 'info';
@@ -92,14 +149,14 @@ let () =
     };
 
     runBtn.addEventListener('click', function() {
-        outputDiv.innerHTML = ''; // Clear output
+        outputDiv.innerHTML = '';
+        clearErrors(); // On nettoie les erreurs précédentes avant de relancer
+        
         var code = editor.getValue();
         
         if (window.ocaml && window.ocaml.run) {
             try {
-                // Exécution du code
                 var result = window.ocaml.run(code);
-                // Affichage du résultat final (valeur de retour)
                 if(result && result.trim() !== "") {
                     var el = document.createElement('div');
                     el.textContent = result;
@@ -112,7 +169,7 @@ let () =
                 window.ocaml_log('stderr', "Erreur interne JS: " + e.message);
             }
         } else {
-            window.ocaml_log('stderr', "Le compilateur OCaml n'est pas encore chargé. Attendez quelques secondes...");
+            window.ocaml_log('stderr', "Le compilateur OCaml n'est pas encore chargé...");
         }
     });
 </script>
