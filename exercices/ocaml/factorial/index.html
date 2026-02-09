@@ -82,7 +82,11 @@ let () =
         mode: 'text/x-ocaml',
         lineNumbers: true,
         matchBrackets: true,
-        theme: 'material-palenight'
+        theme: 'material-palenight',
+        extraKeys: {  
+            "Shift-Enter": function(cm) {
+                runCode(); 
+            }
     });
 
     var runBtn = document.getElementById('run-btn');
@@ -102,6 +106,9 @@ let () =
         // Le format standard OCaml est souvent: File "...", line 2, characters 4-15:
         var regex = /line (\d+), characters (\d+)-(\d+)/;
         var match = msg.match(regex);
+
+        // pour éviter un crash JS si l'erreur pointe vers une ligne supprimée
+        if (line >= editor.lineCount()) return;
 
         if (match) {
             // OCaml compte les lignes à partir de 1, CodeMirror à partir de 0 -> on fait -1
