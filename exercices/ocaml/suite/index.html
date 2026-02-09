@@ -5,14 +5,14 @@
     <title>Suite</title>
     <link rel="stylesheet" href="/codemirror.css">
     <link rel="stylesheet" href="/ocaml-style.css">
-    <!-- <link rel="stylesheet" href="/ex_ocaml.css"> -->
+
+</head>
+<body>
+
     <script src="/codemirror.js"></script>
     <script src="/matchbrackets.js"></script>
     <script src="/mllike.js"></script>
     <script src="/toplevel.js"></script> 
-
-</head>
-<body>
 
 <div class="exercise-container">
     <div class="panel left-panel">
@@ -158,53 +158,5 @@ done;;
     });
 </script>
 
-
-<script>
-    var outputDiv = document.getElementById('output');
-
-    // Cette fonction est appelée AUTOMATIQUEMENT par OCaml quand il y a un print
-    window.ocaml_log = function(type, msg) {
-        if (!msg || msg.trim() === "") return;
-        
-        var el = document.createElement('div');
-        el.textContent = msg;
-        el.className = (type === 'stderr') ? 'error' : 'info';
-        
-        outputDiv.appendChild(el);
-        outputDiv.scrollTop = outputDiv.scrollHeight;
-    };
-
-    var runBtn = document.getElementById('run-btn');
-    var editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
-        mode: 'text/x-ocaml',
-        lineNumbers: true,
-        matchBrackets: true
-    });
-
-    runBtn.addEventListener('click', function() {
-        outputDiv.innerHTML = ''; // Clear output
-        var code = editor.getValue();
-        
-        if (window.ocaml && window.ocaml.run) {
-            try {
-                // Exécution du code
-                var result = window.ocaml.run(code);
-                // Affichage du résultat final (valeur de retour)
-                if(result && result.trim() !== "") {
-                    var el = document.createElement('div');
-                    el.textContent = result;
-                    el.className = 'success';
-                    outputDiv.appendChild(el);
-                    outputDiv.scrollTop = outputDiv.scrollHeight;
-                }
-            } catch (e) {
-                console.error(e);
-                window.ocaml_log('stderr', "Erreur interne JS: " + e.message);
-            }
-        } else {
-            window.ocaml_log('stderr', "Le compilateur OCaml n'est pas encore chargé. Attendez quelques secondes...");
-        }
-    });
-</script>
 </body>
 </html>
