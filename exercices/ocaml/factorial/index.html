@@ -77,6 +77,32 @@ let () =
 
 
 <script>
+  function lancerExecution() {
+    outputDiv.innerHTML = '';
+    clearErrors(); // On nettoie les erreurs précédentes
+    
+    // "editor" est accessible ici car déclaré plus haut
+    var code = editor.getValue(); 
+    
+    if (window.ocaml && window.ocaml.run) {
+        try {
+            var result = window.ocaml.run(code);
+            if(result && result.trim() !== "") {
+                var el = document.createElement('div');
+                el.textContent = result;
+                el.className = 'success';
+                outputDiv.appendChild(el);
+                outputDiv.scrollTop = outputDiv.scrollHeight;
+            }
+        } catch (e) {
+            console.error(e);
+            window.ocaml_log('stderr', "Erreur interne JS: " + e.message);
+        }
+    } else {
+        window.ocaml_log('stderr', "Le compilateur OCaml n'est pas encore chargé...");
+    }
+  };
+
     var outputDiv =  document.getElementById('output');
 
     var editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
@@ -87,7 +113,7 @@ let () =
         theme: 'material-palenight',
         extraKeys: {  
             "Shift-Enter": function(cm) {
-                runCode(); 
+                lancerExecution(); 
              }
          }
     }
@@ -150,30 +176,7 @@ let () =
         outputDiv.scrollTop = outputDiv.scrollHeight;
     };
 
-    runBtn.addEventListener('click', function() {
-        outputDiv.innerHTML = '';
-        clearErrors(); // On nettoie les erreurs précédentes avant de relancer
-        
-        var code = editor.getValue();
-        
-        if (window.ocaml && window.ocaml.run) {
-            try {
-                var result = window.ocaml.run(code);
-                if(result && result.trim() !== "") {
-                    var el = document.createElement('div');
-                    el.textContent = result;
-                    el.className = 'success';
-                    outputDiv.appendChild(el);
-                    outputDiv.scrollTop = outputDiv.scrollHeight;
-                }
-            } catch (e) {
-                console.error(e);
-                window.ocaml_log('stderr', "Erreur interne JS: " + e.message);
-            }
-        } else {
-            window.ocaml_log('stderr', "Le compilateur OCaml n'est pas encore chargé...");
-        }
-    });
+    runBtn.addEventListener('click',  lancerExecution);
 </script>
 
 </body>
