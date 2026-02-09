@@ -69,8 +69,6 @@ let () =
 
 
 <script>
-    var outputDiv = document.getElementById('output');
-
     var editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
         mode: 'text/x-ocaml',
         lineNumbers: true,
@@ -78,7 +76,7 @@ let () =
         theme: 'material-palenight'
     });
   
-    var outputDiv = document.getElementById('output');
+    var outputDiv = document.getElementById('output-log');
     var runBtn = document.getElementById('run-btn');
 
     // Cette fonction est appelée AUTOMATIQUEMENT par OCaml quand il y a un print
