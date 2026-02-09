@@ -53,23 +53,24 @@ n! = n \times (n-1)!$$ pour $n > 0$
         </details>
         
     </div>
-
-    <div class="panel center-panel" style="padding:0;">
-        <div class="editor-toolbar">
-            <button id="run-btn">Exécuter ▶</button>
-            <button id="reset-btn">Réinitialiser</button>
-        </div>
-        <textarea id="code-editor">let rec factorielle n =
+    <div class="main-content-area">
+      <div class="panel center-panel" style="padding:0;">
+          <div class="editor-toolbar">
+              <button id="run-btn">Exécuter ▶</button>
+              <button id="reset-btn">Réinitialiser</button>
+          </div>
+          <textarea id="code-editor">let rec factorielle n =
   (* Votre code ici *)
   0
 
 let () =
   print_int (factorielle 5)
 </textarea>
-      </div>
+        </div>
 
-    <div class="panel bottom-panel">
-        <div class="output-log" id="output">Initialisation OCaml... Lancer l'évalution !</div>
+      <div class="panel bottom-panel">
+          <div class="output-log" id="output">Initialisation OCaml... Lancer l'évalution !</div>
+      </div>
     </div>
 </div>
 

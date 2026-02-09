@@ -69,13 +69,13 @@ done;;
         </details>
         
     </div>
-
-    <div class="panel center-panel" style="padding:0;">
-        <div class="editor-toolbar">
-            <button id="run-btn">Exécuter ▶</button>
-            <button id="reset-btn">Réinitialiser</button>
-        </div>
-        <textarea id="code-editor">let next terme = (* TODO *);;
+    <div class="main-content-area">
+      <div class="panel center-panel" style="padding:0;">
+          <div class="editor-toolbar">
+              <button id="run-btn">Exécuter ▶</button>
+              <button id="reset-btn">Réinitialiser</button>
+          </div>
+          <textarea id="code-editor">let next terme = (* TODO *);;
 
 let u_imp_for u0 n = 0 (* TODO *);;
 
@@ -87,10 +87,11 @@ for i = 0 to 10 do
   assert (u 0 i = u_imp_while 0 i)
 done;;
 </textarea>
-      </div>
+        </div>
 
-    <div class="panel bottom-panel">
-        <div class="output-log" id="output">Initialisation OCaml... Lancer l'évalution !</div>
+      <div class="panel bottom-panel">
+          <div class="output-log" id="output">Initialisation OCaml... Lancer l'évalution !</div>
+      </div>
     </div>
 </div>
 
