@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/codemirror.css">
     <link rel="stylesheet" href="/ocaml-style.css">
     <link rel="stylesheet" href="/material-palenight.css">
+    <link rel="stylesheet" href="/katex.min.css">
 </head>
 <body>
 
@@ -130,35 +131,46 @@ let () =
         errorMarks = [];
     }
 
-    // Fonction pour analyser le texte d'erreur OCaml et souligner
-    function highlightError(msg) {
-        // Regex pour capturer: "line X, characters Y-Z"
-        // Le format standard OCaml est souvent: File "...", line 2, characters 4-15:
-        var regex = /line (\d+), characters (\d+)-(\d+)/;
-        var match = msg.match(regex);
+function highlightError(msg) {
+    // AFFICHER LE MESSAGE REÇU DANS LA CONSOLE (F12)
+    console.log("Message d'erreur reçu pour analyse :", msg);
 
-        // pour éviter un crash JS si l'erreur pointe vers une ligne supprimée
-        if (line >= editor.lineCount()) return;
+    // Regex améliorée :
+    // 1. Le 'i' à la fin la rend insensible à la casse (Line vs line)
+    // 2. \s+ permet de gérer un ou plusieurs espaces
+    var regex = /line\s+(\d+),\s+characters\s+(\d+)-(\d+)/i;
+    
+    var match = msg.match(regex);
 
-        if (match) {
-            // OCaml compte les lignes à partir de 1, CodeMirror à partir de 0 -> on fait -1
-            var line = parseInt(match[1], 10) - 1;
-            var chStart = parseInt(match[2], 10);
-            var chEnd = parseInt(match[3], 10);
+    if (match) {
+        console.log("Match trouvé !", match); // Debug
 
-            // Création du marqueur
-            var mark = editor.markText(
-                {line: line, ch: chStart},
-                {line: line, ch: chEnd},
-                {
-                    className: "cm-error-underline",
-                    title: msg, // Affiche l'erreur au survol de la souris
-                    clearOnEnter: true // Efface le soulignement dès que l'élève modifie la zone
-                }
-            );
-            errorMarks.push(mark);
+        var line = parseInt(match[1], 10) - 1; // Ligne (base 0)
+        var chStart = parseInt(match[2], 10);  // Début
+        var chEnd = parseInt(match[3], 10);    // Fin
+
+        console.log("Tentative de soulignement : Ligne", line, "Cols", chStart, "à", chEnd);
+
+        // Vérification de sécurité pour ne pas planter si la ligne n'existe pas
+        if (line < 0 || line >= editor.lineCount()) {
+            console.warn("Ligne hors limites pour l'éditeur");
+            return;
         }
+
+        var mark = editor.markText(
+            {line: line, ch: chStart},
+            {line: line, ch: chEnd},
+            {
+                className: "cm-error-underline",
+                title: msg,
+                clearOnEnter: true
+            }
+        );
+        errorMarks.push(mark);
+    } else {
+        console.warn("Aucun match regex trouvé dans le message d'erreur.");
     }
+}
 
     window.ocaml_log = function(type, msg) {
         if (!msg || msg.trim() === "") return;
