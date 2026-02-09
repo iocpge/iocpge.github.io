@@ -15,21 +15,6 @@
     <script src="/mllike.js"></script>
     <script src="/toplevel.js"></script> 
 
-<style>
-        /* 2. Style pour la vaguelette rouge */
-        .cm-error-underline {
-            text-decoration: underline;
-            text-decoration-style: wavy;
-            text-decoration-color: red;
-            /* Fallback pour vieux navigateurs si nécessaire: border-bottom: 2px dotted red; */
-        }
-        
-        /* Ajustement visuel pour le thème sombre */
-        .cm-s-material-palenight span.cm-error-underline {
-            text-decoration-color: #ff5f5f; 
-        }
-    </style>
-
 
 <div class="exercise-container">
     <div class="panel left-panel">
@@ -87,10 +72,6 @@ done;;
     </div>
 
     <div class="panel center-panel" style="padding:0;">
-        <div class="editor-toolbar">
-            <button id="run-btn">Exécuter ▶</button>
-            <button id="reset-btn">Réinitialiser</button>
-        </div>
         <textarea id="code-editor">let next terme = (* TODO *);;
 
 let u_imp_for u0 n = 0 (* TODO *);;
@@ -103,24 +84,33 @@ for i = 0 to 10 do
   assert (u 0 i = u_imp_while 0 i)
 done;;
 </textarea>
-    </div>
+        <div class="editor-toolbar">
+            <button id="run-btn">Exécuter ▶</button>
+            <button id="reset-btn">Réinitialiser</button>
+        </div>
+      </div>
 
     <div class="panel right-panel">
-        <div class="output-log" id="output">Initialisation OCaml...</div>
+        <div class="output-log" id="output">Initialisation OCaml... Lancer l'évalution !</div>
     </div>
 </div>
 
 
 <script>
-    var outputDiv = document.getElementById('output');
+    var outputDiv =  CodeMirror.fromTextArea(document.getElementById('output'), {
+        mode: 'text/x-ocaml',
+        lineNumbers: true,
+        matchBrackets: true,
+        theme: 'material-palenight'
+    });
 
     var editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
         mode: 'text/x-ocaml',
         lineNumbers: true,
         matchBrackets: true,
-        theme: 'material-palenight' // Cela fonctionnera maintenant grâce au CSS
+        theme: 'material-palenight'
     });
-  
+
     var runBtn = document.getElementById('run-btn');
     
     // Variable pour stocker les marqueurs d'erreurs actuels

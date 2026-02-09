@@ -70,3 +70,17 @@ button {
 }
 button:hover { background-color: #0056b3; }
 details { margin-top: 1em; cursor: pointer; }
+
+/* 2. Style pour la vaguelette rouge */
+.cm-error-underline {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: red;
+    /* Fallback pour vieux navigateurs si nécessaire: border-bottom: 2px dotted red; */
+}
+
+/* Ajustement visuel pour le thème sombre */
+.cm-s-material-palenight span.cm-error-underline {
+    text-decoration-color: #ff5f5f; 
+}
+
