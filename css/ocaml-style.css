@@ -23,13 +23,13 @@
     width: 45%;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid #ddd;
+    border-right: 2px solid #ddd;
 }
 
 .editor-toolbar {
     padding: 10px;
     background: #eee;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid #ddd;
     display: flex;
     gap: 10px;
 }
