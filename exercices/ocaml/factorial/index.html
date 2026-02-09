@@ -22,7 +22,7 @@
         <h1>Factorielle</h1>
         <div class="instructions">
             <h2>Énoncé</h2>
-<p>Écrivez une fonction <code>factorielle</code> qui prend un entier <code>n</code> et renvoie sa factorielle ( $ n! $ ) ).</p>
+<p>Écrivez une fonction <code>factorielle</code> qui prend un entier <code>n</code> et renvoie sa factorielle (<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>!</mo></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">n</span><span class="mclose">!</span></span></span></span>).</p>
 <p>Rappel :</p>
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>!</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0! = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathrm">0</span><span class="mclose">!</span><span class="mrel">=</span><span class="mord mathrm">1</span></span></span></span></li>
@@ -42,9 +42,9 @@
         
         <details>
             <summary>Solution</summary>
-            <pre><code>let rec factorielle n =
+            <pre><code>let rec fact n =
   if n &lt;= 1 then 1
-  else n * factorielle (n - 1)
+  else n * fact (n - 1)
 </code></pre>
         </details>
         
@@ -55,12 +55,12 @@
               <button id="run-btn">Exécuter ▶</button>
               <button id="reset-btn">Réinitialiser</button>
           </div>
-          <textarea id="code-editor">let rec factorielle n =
+          <textarea id="code-editor">let rec fact n =
   (* Votre code ici *)
-  0
+ ;;    
 
-let () =
-  print_int (factorielle 5)
+(* tests *)
+ fact 5;;
 </textarea>
         </div>
 
