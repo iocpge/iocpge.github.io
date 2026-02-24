@@ -93,6 +93,25 @@ def jouer_partie(strategie_noire, strategie_blanche):
         print("Égalité - partie nulle !", nn, nb)
     return vainqueur
 
+def jouer_partie_silencieuse(strategie_noire, strategie_blanche):
+    plateau = init()
+    joueur_courant = NOIR  # Premier joueur (règle officielle)
+    impasses = 0
+    while impasses < 2:  # un des deux joueurs peut jouer
+        coups = coups_possibles(plateau, joueur_courant)
+        if not coups:
+            impasses += 1
+        else:
+            impasses = 0
+            if joueur_courant == NOIR:
+                coup = strategie_noire(plateau, joueur_courant)
+            else:
+                coup = strategie_blanche(plateau, joueur_courant)
+            plateau = jouer_un_coup(plateau, coup[0], coup[1], joueur_courant)
+
+        joueur_courant = BLANC if joueur_courant == NOIR else NOIR
+    vainqueur = est_vainqueur(plateau)
+    return vainqueur, plateau
 
 # Stratégie aléatoire
 def strategie_aleatoire(plateau, joueur):
