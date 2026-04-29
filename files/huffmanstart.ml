@@ -25,8 +25,8 @@ let occurrences s =
   List.rev result;;
 
 (* Exemple d'utilisation *)
-let s = "Il vivait sur les bords du Mississippi, Tom Sayer c'est pour nous tous un ami."
-let result = occurrences s
+let s = "Il vivait sur les bords du Mississippi, Tom Sayer c'est pour nous tous un ami.";;
+let result = occurrences s;;
 
 (* Occurrences avec table de hachage *)
 let occurrences s =
@@ -42,8 +42,8 @@ let occurrences s =
     Hashtbl.fold (fun k v acc -> (Leaf k, v) :: acc) dict [];;
 
 (* Exemple d'utilisation *)
-let s = "Il vivait sur les bords du Mississippi, Tom Sayer c'est pour nous tous un ami."
-let result = occurrences s
+let s = "Il vivait sur les bords du Mississippi, Tom Sayer c'est pour nous tous un ami.";;
+let result = occurrences s;;
 
 (* Construction de l'arbre d'Huffman à partir de occurrences *)
 let compare (_,n1) (_,n2) = 0 ;;
@@ -81,8 +81,7 @@ h_decode mtree coded;;
 
 let compression_rate text =
     let occ = occurrences text in
-    let q = insert_sort occ in
-    let ht = huffmann_tree q in
+    let ht = huffmann_tree occ in
     let hmap = encode_map ht in
     let emsg = h_encode hmap text in
     1. -. (float(String.length emsg) /. float(8 * String.length text));;

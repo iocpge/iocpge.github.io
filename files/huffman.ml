@@ -115,9 +115,7 @@ h_decode mtree coded;;
 
 let compression_rate text =
     let occ = occurrences text in
-(*    let q = List.sort occ_compare occ in*)
-    let q = insert_sort occ in
-    let ht = huffmann_tree q in
+    let ht = huffmann_tree occ in
     let hmap = encode_map ht in
     let emsg = h_encode hmap text in
     1. -. (float(String.length emsg) /. float(8 * String.length text));;
